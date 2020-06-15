@@ -1,0 +1,418 @@
+% !TeX root = ../main.tex
+% Add the above to each chapter to make compiling the PDF easier in some editors.
+
+\chapter{Background}\label{chapter:background}
+
+\section{Sensor}
+
+A sensor is a device that can  monitor the environment that its designed for. Senson can be a single pice of hardware or can be a combination of hardware  accuaring multiple information.
+Sensors vary in quality and price. Many modern sensors have on-board
+processing units to understand the data acquired from the sensing element without
+a separate computational platform. Remote sensing devices are sensors that can
+perceive information without physical contact. Unfortunately, sensors tend to have
+inherent problems including, but not limited to [Elmenreich, 2001]:
+\begin{itemize}
+\item Spatial coverage limits: Each sensor may only cover a certain region of space. For example, a dashboard camera will observe less surrounding region than a
+camera with a wide-view lens.
+\item Temporal coverage limits: Each sensor may only provide updates over certain periods of time, which may cause uncertainty between updates.
+\item  Imprecision: Each sensor has limits to its sensing element. • Uncertainty: Unlike imprecision, uncertainty varies with the object being observed rather than the device making the observation. Uncertainty may be
+introduced by many environment factors or sensor defects in addition to time
+delay.
+
+\item Deprivation of sensor: Sensor element breakdown will cause loss of perception in environment.
+Many diﬀerent types of sensors exist in the world, and each has its own unique ap
+plication. Four sensors are pertinent to the ﬁeld of autonomous driving [Levinson et al., 2011].
+The four sensors, their descriptions, uses, advantages and disadvantages are men
+tioned below:
+\item GPS: Global-positioning system (GPS) is a system of satellites and receivers used for global navigation of Earth designed by the U.S. military. GPS sends a
+signal to any GPS receiver with an unobstructed line of sight to four or more
+GPS satellites surrounding Earth [gps, 2011]. GPS is useful for ﬁnding the
+exact coordinates of a vehicle when it is in the line of sight of multiple satellites
+orbiting the Earth.
+
+– Advantages: Precise coordinate measurements, fast, reliable in line of
+sight, externally-managed satellite systems.
+– Disadvantages: Expensive, subject to failure in bad weather conditions,
+subject to failure in distant locations where satellite coverage is blocked or
+unavailable, dependent on external data source, subject to hijacking and
+interference.
+
+\item Radar: RAdio Detection And Ranging (radar) is a remote sensing device that uses an antenna to scatter radio signals across a region in the direction it is
+pointing and listens for response signals that are reﬂected by objects in that area.
+Radar measures signal time of ﬂight to determine the distance. Radars may use
+the doppler eﬀect to compute speed based on shift in frequency of scattered
+waves as an object moves. Radar is useful for detecting obstacles, vehicles and
+pedestrians around a vehicle [Huang et al., 2016]. Tracking multiple targets at
+once is a primary use for an automotive radar.
+– Advantages: High-bandwidth signals, wide-spread area coverage, inde
+pendent from external systems, works in multiple weather conditions, light
+independent solution.
+– Disadvantages: Expensive, subject to interference, easy to corrupt signal
+with electromagnetic interference, many reﬂective radio responses make it
+harder to manage radar signals, algorithms for radar tracking are still
+imperfect, narrow ﬁeld-of-view.
+\item Camera: A camera is an optical instrument that utilizes at least one converging or convex lens and a shutter to limit light intake into an enclosed housing for
+capturing images or recording image sequences [Kodak, 2017]. Video cameras
+work much like still-image cameras, but instead of simply capturing still images,
+they record a series of successive still images rapidly at a speciﬁc frame rate
+
+[Kodak, 2017]. A camera is useful for acquiring images or video sequences of
+object pixels in view of the lens in order to help detect, segment, and classify
+objects based on perceivable object properties like location, color, shape, edges
+and corners.
+– Advantages: Perceives high-level object characteristics like color, shape,
+and edges, perceives location relative to camera unit, easy to visualize
+data.
+– Disadvantages: Potential slow frame-rate update, image quality may
+be dependent on light, weather and various other factors, data-intensive
+processing, all cameras perceive objects diﬀerently, typically has a limited
+range of perception compared to other sensors, may be expensive.
+ \item LiDAR: Light Detection and Ranging (LiDAR) is a method of remote sensing that uses light in the form of a pulsed laser to measure distance to an object
+based on signal time of ﬂight [NOAA, 2012]. LiDAR is useful for perceiving
+surroundings when 3-dimensional, high-resolution, light-independent images are
+necessary.
+– Advantages: Independent of light, weather and external data sources,
+fast, accurate, 3-dimensional, high-resolution.
+– Disadvantages: Expensive, subject to interference by reﬂection or lack
+thereof, incompatible with transparent surfaces, data-intensive processing,
+less durable than other sensors.
+
+\end{itemize}
+
+\section{Sensor Fusion}
+Sensor fusion is the act of combining data acquired from two or more sensors sources
+such that the resulting combination of sensory information provides a more certain description of factors observed by the separate sensors than would be if used individ
+ually [Elmenreich, 2001]. Sensor fusion is pertinent in many applications that entail
+the use of multiple sensors for inference and control. Examples of applications in
+clude intelligent and automated systems such as automotive driver assistance systems,
+autonomous robotics, and manufacturing robotics [Elmenreich, 2007].
+Sensor fusion methods aim to solve many of the problems inherently present in
+sensors. Several important beneﬁts may be derived from sensor fusion systems over
+single or disparate sensor sources. The beneﬁts of sensor fusion over single source are
+the following [Elmenreich, 2001]:
+\begin{itemize}
+ \item Reliability: Using multiple sensor sources introduces more resilience to partial sensor failure, which leads to greater redundancy and reliability.
+ \item Extended spatial coverage: Each sensor may cover diﬀerent areas. Combining the covered areas will lead to a greater overall coverage of surrounding
+environment and accommodate sensor deprivation.
+ \item Extended temporal coverage: Each sensor may update at diﬀerent time intervals, and thus interpolated sensor updates can be joined for increased tem
+poral coverage and decreased sensor deprivation.
+ \item Increased Conﬁdence: Combining sensor data will provide increased conﬁdence by providing measurements resilient to the uncertainties in any particular
+sensor based on the combined coverage and error mitigation of all sensors. \item  Reduced Uncertainty: Given the resilience of multiple sensors to the speciﬁc uncertainty of any one, the overall uncertainty of the perception system can be
+drastically reduced using sensor fusion.
+ \item Robustness against noise: Multiple sensor sources can be used to determine when any one sensor has encountered noise in order to mitigate inﬂuence of
+noise in the system.
+ \item Increased Resolution: Multiple sensor sources can be used to increase the resolution of measurements by combining all observations.
+\end{itemize}
+According to [Rao, 2001], sensor fusion can yield results that outperform the measurements of the single best sensor in the system if the fusion function class satisﬁes a
+proposed isolation property based on independently and identically distributed (iid)
+samples. The fusion function classes outlined that satisfy this isolation property
+are linear combinations, certain potential functions and feed-forward piecewise linear
+neural networks based on minimization of empirical error per sample.
+
+
+
+\section{Current Sensor Fusion Systems}
+Many researchers and companies have developed their own versions of sensor fusion
+systems for various purposes. Many of these systems are well-known an widely used
+in practice within the ﬁelds of automotive and robotics. In [Steux et al., 2002], a
+vehicle detection and tracking system using monocular color vision and radar data
+fusion using a 3-layer belief network was proposed called FADE. The fusion system
+focused on lower-level fusion and combined 12 diﬀerent features to generate target
+position proposals each step and for each target. FADE performed in real-time and
+yielded good detection results in most cases according to scenarios recorded in a real
+car.
+A fusion system for collision warning using a single camera and radar was applied
+to detect and track vehicles in [Srinivasa et al., 2003]. The detections were fused using
+a probabilistic framework in order to compute reliable vehicle depth and azimuth
+angles. Their system clustered object detections into meta-tracks for each object and
+fused object tracks between the sensors. They found that the radar had many false
+positives due to multiple detections on large vehicles, structures, roadway signs and overhead structures. They also found that the camera had false positive detections on
+larger vehicles and roadway noise like potholes. Their system worked appropriately
+for nearby vehicles that were clearly visible by both sensors, but the system failed to
+detect vehicles more than 100 meters away due to insuﬃcient resolution or vehicle
+occlusion.
+In [Dagan et al., 2004], engineers from Mobileye successfully applied a camera
+system to compute the time to collision (TTC) course from size and position of
+vehicles in the image. Although they did not test this theory, they mentioned the
+future use of radar and camera in a sensor fusion system since the radar would
+give more accurate range and range-rate measurements while the vision would solve
+angular accuracy problems of the radar. When the research was conducted, it was
+suggested that the fusion solution between radar and camera was costly, but since
+then, costs have decreased.
+A collision mitigation fusion system using a laser-scanner and stereo-vision was
+constructed and tested in [Labayrade et al., 2005]. The combination of the compli
+mentary laser scanner and stereo-vision sensors provided a high detection rate, low
+false alarm rate, and a system reactive to many obstacle occurrences. They men
+tioned that the laser-scanner was fast and accurate but could not be used alone due
+to many false alarms from collisions with the road surface and false detections with
+laser passes over obstacles. They also mentioned that stereo-vision was useful for
+modeling road geometry and obstacle detection, but it was not accurate for comput
+ing precise velocities or TTC for collision mitigation.
+In [Laneurit et al., 2003], a Kalman ﬁlter was successfully developed and applied
+for the purpose of sensor fusion between multiple sensors including GPS, wheel angle
+sensor, camera and LiDAR. They showed that this system was useful for detection
+and localization of vehicles on the road, especially when using the wheel angle sensor
+for detecting changes in vehicle direction. Their results revealed that cooperation between the positioning sensors for obstacle detection and location paired with LiDAR
+were able to improve global positioning of vehicles.
+A deep learning framework for signal estimation and classiﬁcation applicable for
+mobile devices was created and tested in [Yao et al., 2016]. This framework applied
+convolutional and recurrent layers for regression and classiﬁcation mobile comput
+ing tasks. The framework exploited local interactions of diﬀerent sensing modalities
+using convolutional neural network (CNN)s, merged them into a global interaction
+and extracted temporal relationships via stacked GRU or LSTM layers. Their frame
+work achieved a notable mean absolute error on vehicle tracking regression tasks as
+compared to existing sensor fusion systems and high accuracy on human activity
+recognition classiﬁcation tasks while it remained eﬃcient enough to use on mobile
+devices like the Google Nexus 5 and Intel Edison.
+A multimodal, multi-stream deep learning framework designed to tackle the ego
+centric activity recognition using data fusion was proposed in [Song et al., 2016b]. To
+begin, they extended a multi-stream CNN to learn spatial and temporal features from
+egocentric videos. Then, they proposed a multi-stream LSTM architecture to learn
+features from multiple sensor streams including accelerometer and gyroscope. Third,
+they proposed a two-level fusion technique using SoftMax classiﬁcation layers and dif
+ferent pooling methods to fuse the results of the neural networks in order to classify
+egocentric activities. The system performed worse than a hand-crafted multi-modal
+Fisher vector, but it was noted that hand-crafted features tended to perform better
+on smaller datasets. In review of the research, it seems there were limited amounts of
+data, ﬂaws in the fusion design with SoftMax combination and ﬂaws in the sensors,
+such as limited sensing capabilities. These factors all may have led to worse results
+than hand-crafted features on the utilized dataset.
+In [Wu et al., 2015], a multi-stream deep fusion neural network system using con
+volution neural networks and LSTM layers was applied to classify multi-modal temporal stream information in videos. Their adaptive multi-stream fusion system achieved
+an accuracy level much higher than other methods of fusion including averaging, ker
+nel averaging, multiple kernel learning (MKL), and logistic regression fusion methods.
+
+
+
+\section{Machine Learning}
+Machine Learning is a term that describes algorithms that learn from data.
+Goodfellow et al. quotes Mitchell from 1996 for a definition of
+what learning means, A computer program is said to learn from experience
+E with respect to some class of tasks T and performance measure P, if its
+performance at tasks in T, as measured by P, improves with experience E.
+There is a wide variety of tasks T that can be done. For instance common
+tasks are regression, classification, anomaly detection, denoising and translation.
+Depending on what experience E they see during the learning process the most
+algorithms can be classified as supervised or unsupervised learning. Supervised
+learning algorithms experience a data set together with target values or labels
+that act as instructions on what to do. The unsupervised learning algorithms
+don’t have any labels or targets but instead try to learn about the structure of
+the data set. The performance P can be how far off from the labels the output
+of the algorithm is in the case of supervised learning. This performance measure
+is often difficult to choose.
+
+
+
+\section{Deep Learning}
+Deep Learning is a term used for training deep artificial neural networks, or
+ANN s. An ANN is a function approximator consisting of multiple functions,
+
+also called neurons. An ANN is called a feedforward ANN if there are no
+feedback connections of the output of the ANN being sent to itself. Each neuron
+is a linear function of some inputs, fed into a nonlinear function, called activation
+function. If the input of a neuron is a vector x, the output of the neuron gi can
+be written as
+
+
+\subsection{Convulitional Neural Network}
+The non-linear functions called activation functions, such as K in Equation 2.1,
+are typically fixed non-linear functions that are used to make the ANN able to
+approximate non-linear functions. If the non-linear activation functions weren’t
+used, the output of the ANN would still be a linear function of the inputs x. In deep learning, there are a few commonly used functions that
+have become standard as activation functions.
+The rectifying linear unit, or ReLU is a function that is defined as
+
+
+\subsection{Back-propagation}
+When training a ANN to approximate a function, gradient based optimization
+is commonly used. To compute the gradient of a (loss) function f with
+respect to the parameters  an algorithm called back-propagation is commonly
+used. It back-propagates from the objective function to gradients of the different
+weights and biases in the ANN to compute the gradient of the objective function with respect to all the parameters. If we have a function 
+can be a cost function in a supervised learning setting but could also be other
+functions like a reward function in the reinforcement learning setting that will
+
+\subsection{Gradient based optimization for deep learning}
+
+The ANN weights and biases are updated to optimize some objective function
+with gradient based optimization, using the gradients computed with the backprop algorithm.
+The classic algorithm for optimizing the parameters in a ANN is called Gradient
+Descent. be an objective function that we want to minimize, where
+x is the input to the ANN the trainable parameters of the ANN. Then
+moving in the opposite direction of the gradient of L with respect to  we move
+the parameters in a direction that makes the objective function smaller, which is
+what we want. However, usually x are random samples and the true gradient is
+the expected value of the gradient with respect to the random samples actually
+used. Thus when computing the gradient of the loss function as a function of
+some samples x, we are computing an unbiased noisy estimate of the gradient.
+This is referred to as Stochastic Gradient Descent, or SGD. Stochastic Gradient
+
+\subsection{Batch Normalization}
+Batch Normalization is a recent method in deep learning used to be able to train
+networks faster and use higher learning rates with decreased risk of divergence.
+It does so by making the normalization a part of the model architecture, fixing
+the mean and variances of the inputs to a layer by a normalization step. This
+makes the risk of the inputs to the activation functions getting in a range where
+the gradient vanishes smaller and allows for the use of higher learning rates. 
+
+\section{Deep Learning}
+Deep Learning is a term used for training deep artificial neural networks, or
+ANN s. An ANN is a function approximator consisting of multiple functions,
+
+also called neurons. An ANN is called a feedforward ANN if there are no
+feedback connections of the output of the ANN being sent to itself. Each neuron
+is a linear function of some inputs, fed into a nonlinear function, called activation
+function. If the input of a neuron is a vector x, the output of the neuron gi can
+be written as
+
+
+\subsection{Activation Functions}
+The non-linear functions called activation functions, such as K in Equation 2.1,
+are typically fixed non-linear functions that are used to make the ANN able to
+approximate non-linear functions. If the non-linear activation functions weren’t
+used, the output of the ANN would still be a linear function of the inputs x. In deep learning, there are a few commonly used functions that
+have become standard as activation functions.
+The rectifying linear unit, or ReLU is a function that is defined as
+
+\subsection{Cost Functions}
+To train a ANN, cost functions are usually minimized. In supervised learning, where we have labeled data to learn from, the cost functions are more
+straightforward than for instance in reinforcement learning that we will discuss
+in section 
+The two main problems of supervised learning are regression and classification.
+In regression one wants to predict a numerical value whereas in classification the
+goal is to predict which class something belongs to given some inputs. Different
+loss functions are common for regression and classification. Most of them are
+however derived from the same principle, the one of Maximum Likelihood.
+
+\subsection{Back-propagation}
+When training a ANN to approximate a function, gradient based optimization
+is commonly used. To compute the gradient of a (loss) function f with
+respect to the parameters  an algorithm called back-propagation is commonly
+used. It back-propagates from the objective function to gradients of the different
+weights and biases in the ANN to compute the gradient of the objective function with respect to all the parameters. If we have a function 
+can be a cost function in a supervised learning setting but could also be other
+functions like a reward function in the reinforcement learning setting that will
+
+\subsection{Gradient based optimization for deep learning}
+
+The ANN weights and biases are updated to optimize some objective function
+with gradient based optimization, using the gradients computed with the backprop algorithm.
+The classic algorithm for optimizing the parameters in a ANN is called Gradient
+Descent. be an objective function that we want to minimize, where
+x is the input to the ANN the trainable parameters of the ANN. Then
+moving in the opposite direction of the gradient of L with respect to  we move
+the parameters in a direction that makes the objective function smaller, which is
+what we want. However, usually x are random samples and the true gradient is
+the expected value of the gradient with respect to the random samples actually
+used. Thus when computing the gradient of the loss function as a function of
+some samples x, we are computing an unbiased noisy estimate of the gradient.
+This is referred to as Stochastic Gradient Descent, or SGD. Stochastic Gradient
+
+
+
+\section{Sensors}
+
+A sensor is a piece of hardware that monitors an environment based on a sensing
+element. Sensors vary in quality and price. Many modern sensors have on-board
+processing units to understand the data acquired from the sensing element without
+a separate computational platform. Remote sensing devices are sensors that can perceive information without physical contact. Unfortunately, sensors tend to have
+inherent problems including, but not limited to [Elmenreich, 2001]:
+• Spatial coverage limits: Each sensor may only cover a certain region of space. For example, a dashboard camera will observe less surrounding region than a
+camera with a wide-view lens.
+• Temporal coverage limits: Each sensor may only provide updates over certain periods of time, which may cause uncertainty between updates.
+• Imprecision: Each sensor has limits to its sensing element. • Uncertainty: Unlike imprecision, uncertainty varies with the object being observed rather than the device making the observation. Uncertainty may be
+introduced by many environment factors or sensor defects in addition to time
+delay.
+• Deprivation of sensor: Sensor element breakdown will cause loss of perception in environment.
+Many diﬀerent types of sensors exist in the world, and each has its own unique ap
+plication. Four sensors are pertinent to the ﬁeld of autonomous driving [Levinson et al., 2011].
+The four sensors, their descriptions, uses, advantages and disadvantages are men
+tioned below:
+• GPS: Global-positioning system (GPS) is a system of satellites and receivers used for global navigation of Earth designed by the U.S. military. GPS sends a
+signal to any GPS receiver with an unobstructed line of sight to four or more
+GPS satellites surrounding Earth [gps, 2011]. GPS is useful for ﬁnding the
+exact coordinates of a vehicle when it is in the line of sight of multiple satellites
+orbiting the Earth.
+
+– Advantages: Precise coordinate measurements, fast, reliable in line of
+sight, externally-managed satellite systems.
+– Disadvantages: Expensive, subject to failure in bad weather conditions,
+subject to failure in distant locations where satellite coverage is blocked or
+unavailable, dependent on external data source, subject to hijacking and
+interference.
+• Radar: RAdio Detection And Ranging (radar) is a remote sensing device that uses an antenna to scatter radio signals across a region in the direction it is
+pointing and listens for response signals that are reﬂected by objects in that area.
+Radar measures signal time of ﬂight to determine the distance. Radars may use
+the doppler eﬀect to compute speed based on shift in frequency of scattered
+waves as an object moves. Radar is useful for detecting obstacles, vehicles and
+pedestrians around a vehicle [Huang et al., 2016]. Tracking multiple targets at
+once is a primary use for an automotive radar.
+– Advantages: High-bandwidth signals, wide-spread area coverage, inde
+pendent from external systems, works in multiple weather conditions, light
+independent solution.
+– Disadvantages: Expensive, subject to interference, easy to corrupt signal
+with electromagnetic interference, many reﬂective radio responses make it
+harder to manage radar signals, algorithms for radar tracking are still
+imperfect, narrow ﬁeld-of-view.
+• Camera: A camera is an optical instrument that utilizes at least one converging or convex lens and a shutter to limit light intake into an enclosed housing for
+capturing images or recording image sequences [Kodak, 2017]. Video cameras
+work much like still-image cameras, but instead of simply capturing still images,
+they record a series of successive still images rapidly at a speciﬁc frame rate
+
+[Kodak, 2017]. A camera is useful for acquiring images or video sequences of
+object pixels in view of the lens in order to help detect, segment, and classify
+objects based on perceivable object properties like location, color, shape, edges
+and corners.
+– Advantages: Perceives high-level object characteristics like color, shape,
+and edges, perceives location relative to camera unit, easy to visualize
+data.
+– Disadvantages: Potential slow frame-rate update, image quality may
+be dependent on light, weather and various other factors, data-intensive
+processing, all cameras perceive objects diﬀerently, typically has a limited
+range of perception compared to other sensors, may be expensive.
+• LiDAR: Light Detection and Ranging (LiDAR) is a method of remote sensing that uses light in the form of a pulsed laser to measure distance to an object
+based on signal time of ﬂight [NOAA, 2012]. LiDAR is useful for perceiving
+surroundings when 3-dimensional, high-resolution, light-independent images are
+necessary.
+– Advantages: Independent of light, weather and external data sources,
+fast, accurate, 3-dimensional, high-resolution.
+– Disadvantages: Expensive, subject to interference by reﬂection or lack
+thereof, incompatible with transparent surfaces, data-intensive processing,
+less durable than other sensors.
+
+\section{Inertial Mesurement Unit (IMU)}
+An inertial measurement unit is an electronic device that measures and reports a body's specific force, angular rate, and sometimes the orientation of the body, using a combination of accelerometers, gyroscopes, and sometimes magnetometers.
+
+\section{Sensorfutions}
+Sensor fusion is the act of combining data acquired from two or more sensors sources
+such that the resulting combination of sensory information provides a more certain description of factors observed by the separate sensors than would be if used individ
+ually [Elmenreich, 2001]. Sensor fusion is pertinent in many applications that entail
+the use of multiple sensors for inference and control. Examples of applications in
+clude intelligent and automated systems such as automotive driver assistance systems,
+autonomous robotics, and manufacturing robotics [Elmenreich, 2007].
+Sensor fusion methods aim to solve many of the problems inherently present in
+sensors. Several important beneﬁts may be derived from sensor fusion systems over
+single or disparate sensor sources. The beneﬁts of sensor fusion over single source are
+the following [Elmenreich, 2001]:
+
+• Reliability: Using multiple sensor sources introduces more resilience to partial sensor failure, which leads to greater redundancy and reliability.
+• Extended spatial coverage: Each sensor may cover diﬀerent areas. Combining the covered areas will lead to a greater overall coverage of surrounding
+environment and accommodate sensor deprivation.
+• Extended temporal coverage: Each sensor may update at diﬀerent time intervals, and thus interpolated sensor updates can be joined for increased tem
+poral coverage and decreased sensor deprivation.
+• Increased Conﬁdence: Combining sensor data will provide increased conﬁdence by providing measurements resilient to the uncertainties in any particular
+sensor based on the combined coverage and error mitigation of all sensors.
+• Reduced Uncertainty: Given the resilience of multiple sensors to the speciﬁc uncertainty of any one, the overall uncertainty of the perception system can be
+drastically reduced using sensor fusion.
+• Robustness against noise: Multiple sensor sources can be used to determine when any one sensor has encountered noise in order to mitigate inﬂuence of
+
+noise in the system.
+• Increased Resolution: Multiple sensor sources can be used to increase the resolution of measurements by combining all observations.
+According to [Rao, 2001], sensor fusion can yield results that outperform the mea
+surements of the single best sensor in the system if the fusion function class satisﬁes a
+proposed isolation property based on independently and identically distributed (iid)
+samples. The fusion function classes outlined that satisfy this isolation property
+are linear combinations, certain potential functions and feed-forward piecewise linear
+neural networks based on minimization of empirical error per sample.
+
+

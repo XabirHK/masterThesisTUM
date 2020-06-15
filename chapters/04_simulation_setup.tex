@@ -1,0 +1,111 @@
+% !TeX root = ../main.tex
+% Add the above to each chapter to make compiling the PDF easier in some editors.
+
+\chapter{Simulation Setup}\label{chapter:simulation_setup}
+The Experiment Setup can be divided into two phases, one is set up the simulation and collect data from the simulated setup. We call title this two-section as Simulation and Data Collection respectively.
+In this section we describe the detailed information for the simulation software and how we gathered data from the simulation and preprocessed the data to feed in the CNN algorithm.
+
+We use simulated data because its easier to deal without any noise and doesn't need calibration and registration. The other advantages of the simulated data are that the simulated environment is ideal for this kind of experiment without any noisy data and its ideal for the analysis of the result before using it into the real world scenario and compare with it.
+
+We obtained the from the simulation as .txt formate. then we processed the data and convert the data points in csv formate to use in our CNN model.
+
+\section{Simulation}
+As for the simulation we need to choose a simulation software that fulfills our requirement for simulating IMUs and moving the sensors on a flat plane on a predefined path. The other crucial requirements were, the data must be faultless and noise-free. For example, the item that had been utilized to mount the IMUs needed to move openly satisfying Six Degrees of Freedom (6DoF). 
+
+Moreover, the estimations from the virtual IMUs must be as exact as conceivable to imitate a real situation. We had fewer options for the simulation software to choose from. Among the simulation software we checked for our simulation MATLAB and CoppeliaSim Robotics were better performing.
+
+\subsection{Simulation software}
+After intensive investigation, we chose to go with the CoppeliaSim Robotics Education version for our simulation tool. Beforehand this product was known as V-Rep by Coppelia Robotics. One of the primary purposes behind picking this simulation tool is the assortment of accessible simple to utilize alternatives to mimic genuine situations. This product is created to recreate genuine situations for various mechanical parts for example Robot arms, Hexapods. It additionally has a wide scope of different segments for reproduction purposes. For instance – Infrastructure, furniture, family unit things, office things, and even people for reenactment purposes. This product offers a scope of usable virtual sensors for example – accelerometers, spinners, vision sensors, laser scanner, GPS sensors, and so forth. 
+
+The training adaptation is free for all. Since we didn't need to stress over the frequencies of various IMUs since every one of them is reproduced, the CPU recurrence made a difference the most while gathering the information. To analyze the reason, we ran the recreation on various CPU load. For example, with 4 IMUs and no other application running on the foundation, it took roughly 73 minutes to gather 1,06,437 information focuses. In a similar arrangement, however, with Google Chrome running on the foundation, the reenactment could just gather 47,509 information focuses on a similar time. It is required to run the reproduction remain solitary to get around the comparative number of information that focuses on a comparable time period.
+
+In the following section we will describe the the components of the CoppeliaSim Robotics and how we used it to create the simulation 
+
+\subsection{Scene Object}
+
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{figures/adding_2d_plane.png}
+    \caption{2D plane to the scene.}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{figures/config_plane.png}
+    \caption{Plane Configaration.}
+  \end{subfigure}
+ \begin{subfigure}[b]{0.6\linewidth}
+    \includegraphics[width=\linewidth]{figures/plane.png}
+    \caption{Created 2D plane.}
+  \end{subfigure}
+  \caption{Creating scene object.}
+  \label{fig:scene_object}
+\end{figure}
+
+To recreate a real-world like situation, the main thing we required was an object for the scene. The object would represent the qualities of a moving segment in the simulated scenario
+
+For our investigation, we required an object to contain the IMUs that would move along on a pre-characterized way. Obviously, 6 DoF must be guaranteed to make however much as could reasonably be expected accurate data. For our first methodology, we utilized effectively accessible predefined shapes that built-in the software. The software gives a number of predefined shapes such as plane, circle, cuboid, circle, and cylinder. We picked to utilize a two-dimensional plane as our object since it is the nearest to our model scenario. 
+
+
+
+The plane is sufficiently large to contain at least 16 IMUs which is the most noteworthy number of IMUs we chose to utilize. The examples for putting the IMUs on the plane had been chosen together which would in the end help us to get the most ideal and solid information. 
+
+To add our ideal object to the scene, the following steps were :
+\begin{enumerate}
+  \item Click on ‘Add’ on the menu bar.
+  \item Go to the first option; ‘Primitive Shape’.
+  \item Click on ‘Plane’ to add a two dimensional plane in our scene.
+  \item No change needed in the ‘Primitive plane’ dialog box and click ‘OK’.
+\end{enumerate}
+
+
+\subsection{Inertial Measurement Units}
+
+The next task is to add IMUs (Inertial Measurement Units) into our plane. The IMU containes an accelerometer and a gyroscope sensor. In the sensor section of the simulation tool, there is no IMU sensor out of the box but there are an accelerometer and a gyroscope sensor. To create IMU we combined these 2 sensors and added to to our plane. 
+
+To add one of those sensors to our scene, the following steps are needed to be followed:
+
+\begin{enumerate}
+  \item Click on ‘components’ on the ‘Model browser’ pane.
+  \item Click on ‘sensors’; this would open a new pane for all the available sensors just below the browser pane.
+  \item Scroll down the pane to select our desired sensors (accelerometer, gyroscope).
+  \item Drag and drop the sensors on our plane in the scene.
+\end{enumerate}
+
+
+\begin{figure}[h!]
+    \centering
+    \setkeys{Gin}{height=45mm}
+        \subfloat[selection sensor componant.]{\includegraphics{figures/selecting_sensor_componant.png}}
+        \quad
+        \subfloat[selction accelerometer and a gyroscope sensor.]{%
+            \includegraphics{figures/selecting_gyro_acc_componant.png}}
+        \caption{Creating IMU.}
+        \label{fig:creating_IMU}
+    \end{figure}
+
+To combine the accelerometer and a gyroscope sensor and make a single IMU we need to change the LUA script attached with every sensor. Although it was possible just to drag and drop the sensors but we wanted to create a custom script to add a single unit IMU to incorporate our custom simulation control panel. we will discuss the control panel later on in the upcoming section. 
+
+\subsubsection{Making IMU}
+
+
+
+
+
+
+
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{figures/selecting_sensor_componant.png}
+    \caption{Coffee.}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{figures/selecting_gyro_acc_componant.png}
+    \caption{More coffee.}
+  \end{subfigure}
+  \caption{The same cup of coffee. Two times.}
+  \label{fig:coffee}
+\end{figure}
+

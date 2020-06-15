@@ -1,0 +1,29 @@
+% !TeX root = ../main.tex
+% Add the above to each chapter to make compiling the PDF easier in some editors.
+
+\chapter{Introduction}\label{chapter:introduction}
+Some Introduction will go here
+\section{Problem and solution overview}
+
+\subsection{Motivation}
+In Augmented Reality or Mixed Reality, tracking is one of the most important as well as challenging tasks. Tracking means to detect the position and orientation of an object to a coordinate system in real-time. Tracking has to be very accurate, precise and robust otherwise misalignment will occur between the virtual and real objects in the frame which makes the experience much less pleasant to the user. In the sector of medical augmented reality, the situation can be severe.
+
+There are many methods for tracking an object. We can track an object by multiple camera setup or use mechanical sensors such as Inertial Measurement Unit (IMU) or we can use hybrid approaches combining both camera and mechanical sensors.
+
+The problem with tracking objects with cameras or hybrid systems is that it needs an external camera setup which is not portable and the setup can be problematic to the user. In order to track objects without the camera, we use a mechanical sensor such as IMU, which is portable and embedded in the Head Mounted Display (HMD). Here sensor fusion comes handy. Sensor fusion is a technic for combining sensory data from multiple sensors output which gives better results for tracking. In the case of IMU sensory data, prior work[] shows that increasing the number of IMU tends to provide better accuracy.
+
+\subsection{Goals}
+Our goal is to develop a deep learning model primarily with Convolutional Nural Network (CNN) and Dense Network to fuse multiple IMU data in a simulated environment. We will use many combinations of several IMUs and different CNN networks to predict the position and orientation of an object in a simulated environment and compare the results with other Deep Learning technics such as Recurrent Neural Network (RNN). We will take the combination which provides the best accuracy in the simulated environment and apply that model in a real-world scenario to test its accuracy to predict object pos.
+
+Acceleration values from an IMU are well known to be highly unstable and there could be misalignment between axes. Using Deep Learning, we aim to achieve a stable and reliable position and orientation transformation without any camera, sensor calibration, registration, and prior error correction.
+
+
+\section{Structure of the Thesis}
+
+This document is divided in five chapters. In the second chapter, the necessary
+theoretical background is presented, whereas third chapter shows the structural
+solution and implementation. Chapter four introduces the obtained results and
+pertinent analysis, while the conclusions and proposed future work are summarized
+in chapter five. Afterwards, references and relevant bibliography are presented and
+the document ends with Appendices where outcomes of every experiment are detailed
+in their plots.

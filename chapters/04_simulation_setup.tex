@@ -255,16 +255,160 @@ We had to do these steps for every control points over our whole path.
 \subsubsection{Path Orientation}
 
 After we created the long path we run the simulation. The simulation was running well and we collected 20 minutes of simulation data. When we were analyzing the data we found that the object orientating in one axis. As we need 6Dof we can not take the data from the simulation. 
+
 After investigating we found to change the orientation of our plane we need to change in the path control points. But, the method or the ability to add a configuration script to adjust the path Control points orientation is not available automatically from the tool. We need to change every control point we added in our simulation path. This was a time-consuming process. The longer the path the more control point we had to change. After a considerable amount of time, we change the control points and run the simulation again. This time our plane was oriented along the 3 axes but there was a problem. The object was only changing its orientation only at the control point but not along the path. For better explanation lets say, The plane was moving from control point A to control point B then to control point C. The plane is only changing its orientation axis when it reaches the control point B and keeps its orientation along the path From B to C and then change its orientation again in point C. This is not what we wanted.
 
 We tried to solve this problem by turning on the "Automatic Orientation" checkbox in the path edit mode dialog box for orientation. By default, this box was checked. With this activated option, the object that moves along the path should frequently change its angles. But in simulation, it does not. The object only keeps the roll but not yaw and pitch. The characteristics of 6 
 DoF are thus violated.
 
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.4\linewidth]{figures/uncheckAuto.png}
+    \caption{Toggle Autometic Rotation.}
+\label{fig:TAutoRotation}
+\end{figure}
+
+After a lot of investigation, the only solution we came up with is to add a lot more control points with a variant of angle values.  To do that first we need to check out the ‘Automatic Orientation’ option from the Path edit panel. This enables us to move the object in our case the 2D pane with 6DoF.
+Creating control points with the very near proximity of multiple angles frequently, resembles the actual close to a real-world scenario. One thing that should be remembered here is that this configuration doesn't remove our missing Pitch, Yaw problem.
+
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{figures/toggleRotation.png}
+    \caption{Rotating the control point}
+  \end{subfigure}
+\quad
+\begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{figures/changingAngles.png}
+    \caption{Changing the Angles .}
+  \end{subfigure}
+ \caption{Orientation of control points.}
+  \label{fig:orientationControlPoints}
+\end{figure}
+
+
+The following steps are necessary to set the orientation values by changing the control points' default angle values: 
+
+\begin{enumerate}
+ \item	Select the latest point on the ‘Control points’ pane.
+ \item.	Click the ‘Object/Item’ rotate on the top control pane. Doing this opens a new control panel for orientation and rotation for that particular control point.
+ \item	Navigate to the ‘Orientation’ tab.
+ \item	Make sure orientation is relative to the world frame.
+ \item.	Change the angle values (alpha, beta, and gamma) and click ‘Apply to selection’.
+\end{enumerate}
+
+After we fix all the contorl panel our path look like the followinge figure.
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.9\linewidth]{figures/finalPath.png}
+    \caption{Final simulation path.}
+\label{fig:finalPath}
+\end{figure}
+
+In the next section we will describe how we created a customize control panel for the simulation.
+
+
+\subsection{Customized Control Panel}
+
+We want to have a control panel to run our simulation. We could run to simulation from the 'CoppeliaSim' tool itself but we wanted to have some graphical user interface (GUI) to control our simulation. The customize GUI allows us to easily change the simulation environment such as Number of IMU, Object Velocity, Object Acceleration, and the Path should follow. Otherwise, we had to change the simulation script every time we run the simulation.
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.6\linewidth]{figures/simCPanel.png}
+    \caption{Simulation control panel.}
+\label{fig:simCP}
+\end{figure}
+
+
+Our control panel GUI was fairly simple and user friendly. We highlighted the 'Run simulation' and 'Stop simulation' button bigger to access easily because these are the buttons we used most. 
+The other options were:
+\begin{enumerate}
+  \item Number of IMU: this is a drop-down menu where we can easily select how many numbers of IMUs should be on the plane. The range is from 1 to 16 with predefined positions.
+  \item Select Velocity: We had three predefined velocity option in this drop-down menu. The predefined options are 0.01, 0.03, 0.05 meter per second.
+  \item Select Acceleration: As like the 'Select velocity'  menu we predefined the acceleration parameter in the dropdown menu.
+  \item Path selection: As we tested our simulation in multiple paths. In this dropdown section, we put the name of the path to select to run the simulation in that path. From the beginning, we created 6 different paths so we named them accordingly. Such as Path1, Path2 till Path6 
+\end{enumerate}
+
+
+\subsubsection{Creating the options for the control panel}
+
+The GUI of the control panel created using simple XML. All the options from the GUI to work we need to add customized Lua Script in our simulation tool. As the starting point of our simulation is our Dummy Object, we had to add the customize Lua Script in the script of the Dummy object.
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.6\linewidth]{figures/assoChildScript.png}
+    \caption{Customizing the script to create the control panel.}
+\label{fig:assoCS}
+\end{figure}
+
+We added the necessary methods such as the functions for velocity and acceleration in this associated child script of the Dummy Object.
+
+
+\subsection{Data Collection}
+Collection of the Data for training our Neural Network model consists of two parts. One is collecting the data of the sensors(IMU) which will be our input data for the model and the other is collecting the data from the dummy object which we call the ground truth will be out label data for our model.
+Primarily we collected data both for ground truth and the IMU data out of the simulation as a txt file. The formate of the data will be discussed in the section: "" . Then we Fromate the data as per our requirement for the Neural Network Model.
+
+It is important to note that, We spent a lot of time preprocessing the data to feed our model. The primary data set will be changed into as a csv formate after we preprocess the data as we need csv formate to feed our model in google collab []. We will discuss preprocessing in the Experiment setup [] section. It is very important to know about the shape of our data to know and identify how our data is going through the network. That is why we took every sensor data in different file formate. Without knowing the shape and size of the data without it, data processing and feeding into the neural networks are incredibly difficult.
+
+\subsubsection{Sensor (IMU) Data}
+We collected each of the Sensor data in different .txt file. The number of the data file, in this case, depending on the number of IMU we have in our simulation. For example, if we have 4 IMU in our simulation we have 8 data files. 2 files for each IMU, one is for the gyroscope data and the other for the accelerometer data. We could have collected the data in a single file but we decided to separate the initial data because it will help us to preprocess the data for better reliability and manipulation. The data formate for the sensor data is given below.
+
+Data formate for the accelarometer :
+\begin{table}[h]
+\begin{tabular}{lllll}
+ timestamp\_1 & a\_x &  a\_y &  a\_z  \\
+ timestamp\_2 & a\_x &  a\_y &  a\_z   \\
+…. & …. &  …. & ….  \\
+…. & …. &  …. & ….  \\
+ timestamp\_n & a\_x &  a\_y &  a\_z 
+\end{tabular}
+\end{table}
 
 
 
+Data formate for the gyroscope:
+
+\begin{table}[h]
+\begin{tabular}{lllll}
+ timestamp\_1 & $ \omega $ \_x &   $ \omega $\_y &   $ \omega $\_z  \\
+ timestamp\_2 & $ \omega $ \_x &   $ \omega $\_y &   $ \omega $\_z  \\
+…. & …. &  …. & ….  \\
+…. & …. &  …. & ….  \\
+ timestamp\_n & $ \omega $ \_x &   $ \omega $\_y &   $ \omega $\_z 
+\end{tabular}
+\end{table}
 
 
+
+The explanation for calling columns a\_x, a\_y, and a\_z of the accelerometer is that 'a' is the unit of acceleration and is readable easily. The same applies to the columns of gyroscopic data "$ \omega $" as the angular velocity unit.
+
+\subsubsection{Ground Truth}
+
+As we said before the ground truth data is the label for the training of our model. The word 'ground truth' in machine learning refers to the precision of the evaluation of learning methods by the training sets. It is used to support or deny scientific theories in mathematical models.  In terms of our goal, the ground truth is the precise position and orientation (pose) of the object in a particular timestamp. We took milliseconds difference from each timestamp.
+
+In our training data set, the input data will be feed into the model and try to mimic the result as close as possible with the ground truth. Ground truth values are extremely crucial to the validation process. So we have to be very careful to have the precise ground truth values from the dummy object in our simulation.
+Another important point to note, The number of ground truth readings should be equal to the number of IMU reading, this way we tried to somewhat synchronize the IMU and ground-truth data. The explanation behind this is that "NaN" values should not be obtained by using a test path dataset to determine the efficiency of one of our trained models.
+
+Normally we should get the ground truth data from the script written in the dummy object attached to the plane but we faced problems with the ground truth values of the script attached to the plane. 
+For unexplained reasons, several values were absent. The CPU was not able to sense the IMU sub-script, which is the accelerometer script, as we thought. 
+We carried out further experiments to integrate the ground truth script into the IMU. After several tests, the ground truth value was finally obtained by using the script in the associated Gyroscope script with similar data point counts. We used the gyroscope script as the parent IMU script.
+
+Data formate for the Ground Truth:
+
+\begin{table}[h]
+\begin{tabular}{lllllll}
+ timestamp\_1 &  t\_x &   t\_y &   t\_z &   o\_x &   o\_y  &  o\_z \\
+  timestamp\_2 &  t\_x &   t\_y &   t\_z &   o\_x &   o\_y  &  o\_z \\
+…. & …. &  …. & …. & …. & …. & …. \\
+…. & …. &  …. & …. & …. & …. & ….  \\
+ timestamp\_n &  t\_x &   t\_y &   t\_z &   o\_x &   o\_y  &  o\_z
+\end{tabular}
+\end{table}
+
+
+We have 1 data file for the ground truth for each simulation run. The file contains seven data columns. The 1st one is the timestamp in milliseconds, the next three are the position coordinates of the plane across three axes and the last three columns contain the plane’s orientation across three axes in degrees. Seven data points in each row make the pose of the plane. It is important to note the orientation calculated in relation to the "World frame" which is the whole simulation frame. 
 %\begin{figure}[h!]
 %  \centering
 %  \begin{subfigure}[b]{0.4\linewidth}

@@ -5,79 +5,256 @@
 
 \section{Sensor}
 
-A sensor is a device that can  monitor the environment that its designed for. Senson can be a single pice of hardware or can be a combination of hardware  accuaring multiple information.
-Sensors vary in quality and price. Many modern sensors have on-board
-processing units to understand the data acquired from the sensing element without
-a separate computational platform. Remote sensing devices are sensors that can
-perceive information without physical contact. Unfortunately, sensors tend to have
-inherent problems including, but not limited to [Elmenreich, 2001]:
+Our modern world us infused with sensors. We use sensors in everyday life concisely or subconsciously. From our smartphone, cars to the state of the art medical equipment, mars roves has a variety of uses of sensors. Although when the term sensor comes up we think about mostly mechanical sensors, such as touchscreen in our smartphone or the fire detection sensor, sensors can be not only mechanical but also chemical, bio, and other variety of types.
+
+These sensors are collecting data every moment in our modern world. For example, our buses, trains, planes, and ships are using GPS to navigate around the world. We are using our smartphone which has a variety of sensors working together like the camera, touch sensors, gyro, GPS, and proximity sensor. They are working continuously in the background and processing data to make our life a  little bit easier. Now we can sense and track out heartbeat just using a wristwatch.
+
+The use of smart sensors in our homes, offices, shopping malls, cars is getting bigger and bigger nowadays. All modern means of transport such as cars, buses, trains are using sensors to create a more comfortable transport experience. For instance, proximity sensors for better parking experience, crash prevention. If we talk about air transportation, the impact of sensors is even more important and critical for instance temperature, air pressure sensors. A single failure of any of these sensors could lead to deadly outcomes with fatality. The list goes on when it comes to the use of sensors and their impacts on our life
+
+n the broadest definition, a sensor is a device that can  monitor the environment that its designed for. A sensor is a device or an integrated system of devices that senses and responds to certain types of environmental inputs. Light, heat, movement, moisture, pressure, or any of a number of other environmental phenomena could be the specific input. The output is usually a signal converted for reading or continuing processing to a human-readable display at the point of the sensor or electronically transmitted over a network. Due to the different needs, the properties of sensors were changed a lot over time. The need enabled intelligent and intelligent sensors to be created. The advent of intelligent sensors led to the development of microcontrollers used everywhere. The smart sensors have allowed us to interface with other devices and make them work together as one device.
+
+
+\subsection{Sensor Types}
+
+As we mentioned before, sensors can be many types, It can be categorized depending on their purpose or depending on how they are made. There are various sensor classifications created by different writers and specialists. An expert in the subject can already use the following sensor classification, but it is an extremely simple sensor classification. They are divided into active and passive in the first classification of the sensors. Active sensors are those that require a power signal or an external excitation signal. On the other hand, passive sensors do not require an external power signal and generate an output response directly. Analog and optical sensors are the final grouping of the sensors. Analog capabilities generate an analog output.
+
+We have a long list of sensors, which we use in our everyday work. If we want to speak briefly about them, we can hardly cover each sensor. We will discuss a few of them which is somewhat related to our work. The sensor mention below are regardless of their classes, they are a mix of digital, analog, active sensors.
+
+\subsubsection{Temperature sensors or thermal sensors}
+
+This system collects temperature information from a system and transforms it into a way that another system or individual can understand. Mercury in a glass thermometer is the simplest example of a temperature sensor. Mercury expands in the glass and contracts to rely on temperature changes. The external temperature is the source factor for measuring the temperature. In order to calculate the temperature, the spectator measures the location of mercury. Two basic temperature sensors are available:
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.8\linewidth]{figures/tempSensor.jpg}
+    \caption{A typical temperature sensor.}
+    \source {emerson.com}
+\label{fig:tempSensor}
+\end{figure}
+
+
 \begin{itemize}
-\item Spatial coverage limits: Each sensor may only cover a certain region of space. For example, a dashboard camera will observe less surrounding region than a
-camera with a wide-view lens.
-\item Temporal coverage limits: Each sensor may only provide updates over certain periods of time, which may cause uncertainty between updates.
-\item  Imprecision: Each sensor has limits to its sensing element. • Uncertainty: Unlike imprecision, uncertainty varies with the object being observed rather than the device making the observation. Uncertainty may be
-introduced by many environment factors or sensor defects in addition to time
-delay.
-
-\item Deprivation of sensor: Sensor element breakdown will cause loss of perception in environment.
-Many diﬀerent types of sensors exist in the world, and each has its own unique ap
-plication. Four sensors are pertinent to the ﬁeld of autonomous driving [Levinson et al., 2011].
-The four sensors, their descriptions, uses, advantages and disadvantages are men
-tioned below:
-\item GPS: Global-positioning system (GPS) is a system of satellites and receivers used for global navigation of Earth designed by the U.S. military. GPS sends a
-signal to any GPS receiver with an unobstructed line of sight to four or more
-GPS satellites surrounding Earth [gps, 2011]. GPS is useful for ﬁnding the
-exact coordinates of a vehicle when it is in the line of sight of multiple satellites
-orbiting the Earth.
-
-– Advantages: Precise coordinate measurements, fast, reliable in line of
-sight, externally-managed satellite systems.
-– Disadvantages: Expensive, subject to failure in bad weather conditions,
-subject to failure in distant locations where satellite coverage is blocked or
-unavailable, dependent on external data source, subject to hijacking and
-interference.
-
-\item Radar: RAdio Detection And Ranging (radar) is a remote sensing device that uses an antenna to scatter radio signals across a region in the direction it is
-pointing and listens for response signals that are reﬂected by objects in that area.
-Radar measures signal time of ﬂight to determine the distance. Radars may use
-the doppler eﬀect to compute speed based on shift in frequency of scattered
-waves as an object moves. Radar is useful for detecting obstacles, vehicles and
-pedestrians around a vehicle [Huang et al., 2016]. Tracking multiple targets at
-once is a primary use for an automotive radar.
-– Advantages: High-bandwidth signals, wide-spread area coverage, inde
-pendent from external systems, works in multiple weather conditions, light
-independent solution.
-– Disadvantages: Expensive, subject to interference, easy to corrupt signal
-with electromagnetic interference, many reﬂective radio responses make it
-harder to manage radar signals, algorithms for radar tracking are still
-imperfect, narrow ﬁeld-of-view.
-\item Camera: A camera is an optical instrument that utilizes at least one converging or convex lens and a shutter to limit light intake into an enclosed housing for
-capturing images or recording image sequences [Kodak, 2017]. Video cameras
-work much like still-image cameras, but instead of simply capturing still images,
-they record a series of successive still images rapidly at a speciﬁc frame rate
-
-[Kodak, 2017]. A camera is useful for acquiring images or video sequences of
-object pixels in view of the lens in order to help detect, segment, and classify
-objects based on perceivable object properties like location, color, shape, edges
-and corners.
-– Advantages: Perceives high-level object characteristics like color, shape,
-and edges, perceives location relative to camera unit, easy to visualize
-data.
-– Disadvantages: Potential slow frame-rate update, image quality may
-be dependent on light, weather and various other factors, data-intensive
-processing, all cameras perceive objects diﬀerently, typically has a limited
-range of perception compared to other sensors, may be expensive.
- \item LiDAR: Light Detection and Ranging (LiDAR) is a method of remote sensing that uses light in the form of a pulsed laser to measure distance to an object
-based on signal time of ﬂight [NOAA, 2012]. LiDAR is useful for perceiving
-surroundings when 3-dimensional, high-resolution, light-independent images are
-necessary.
-– Advantages: Independent of light, weather and external data sources,
-fast, accurate, 3-dimensional, high-resolution.
-– Disadvantages: Expensive, subject to interference by reﬂection or lack
-thereof, incompatible with transparent surfaces, data-intensive processing,
-less durable than other sensors.
+ \item Contact sensors – This type of sensor requires physical direct contact with the sensed object or media. They monitor solids, liquids, and gas temperatures across a broad range of temperatures.
+ \item  Non-contact Sensors – No physical contact with the object or the media is required for this type of sensor. They monitor non-reflective solids and liquids, but because of natural transparency, they are not useful for gasses. These sensors use the Law of Plank for temperature calculation. This law covers heat radiated from the heat source for temperature measurements.
 
 \end{itemize}
+
+
+\subsubsection{Sonar sensors}
+
+
+Sonar sensor: As the name suggests, the Sonar sensor also known as Ultrasonic sensor works based on an ultrasonic pulse time calculation to measure distance.
+
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=\linewidth]{figures/sonarSensor.png}
+    \caption{A sonar sensor combined with microcontroller}
+    \source {arrow.com}
+\label{fig:sonarSensor}
+\end{figure}
+
+
+To measure the specific distance from the sensor, this can be calculated based on this formula \cite{sonar1}:
+
+Distance = 1/2 T x C 
+
+
+where T is time and C is the spped of sound in specific temparatuer of earth environment. At 20$^{\circ}$ C (68$^{\circ}$ F), the speed of sound is 343 meters/second (1125 feet/second), but this varies depending on temperature and humidity.
+
+
+\subsubsection{IR Sensors}
+
+These types of sensors sense the infrared light. In general, all objects on the infrared ( IR ) spectrum emit thermal radiation. That kind of radiation that is not visible to the human eye is measured by the infrared sensor. The biggest advantage of the IR sensor is that it uses very cheap and available and very easy to use. One of the major drawbacks of these sensors is that it pruned to background noise.
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=\linewidth]{figures/irSensor.jpg}
+    \caption{An IR sensor architecture}
+    \source {ram-e-shop.com}
+\label{fig:irSensor}
+\end{figure}
+
+
+The working of IR sensor and sonar sensor is similar, where the sonar sensor emits soundwave and have a receiver for the sound wave the IR use infrared light instead of sound. 
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.5\linewidth]{figures/irSensorWork.jpg}
+    \caption{Working principal of an IR sensor}
+    \source {engineersgarage.com}
+\label{fig:irSensorWork }
+\end{figure}
+
+
+\subsubsection{UV Sensors}
+
+Such sensors measure the intensity or strength of the UV radiation incident. It has a longer wavelength than x-rays but is also shorter than the visible radiation. For robust ultraviolet sensing, an active material called polycrystalline diamond is used. UV sensors can detect exposure to ultraviolet radiation from the environment.
+
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.5\linewidth]{figures/uvSensor.jpg}
+    \caption{UV sensor}
+    \source {roboticsbd.com}
+\label{fig:uvSensor }
+\end{figure}
+
+
+The UV sensor recognizes one energy signal type and transmits different energy signals. They are directed to an electric meter to observe and record these output signals. The output signals are transmitted for the generation of graphs and reports to a software-based computer through an analog-to-digital converter ( ADC).
+
+
+\subsubsection{Touch Sensor}
+
+A touch sensor functions as a variable resistor according to the position of the touch. As seen in figure \ref{touchSensorWork}
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.5\linewidth]{figures/touchSensorWork.png}
+    \caption{Working mecanism of a touch sensor}
+\label{fig:touchSensorWork }
+\end{figure}
+
+A touch sensor made of a substance that is absolutely conductive such as copper Isolated material for the spacing of foam or plastic or material which is partly conductive.
+The way the touch sensor works is that the surface is partly conductive and opposes the present flow. The key concept of the linear position sensor is that when the length of this material, to be traveled by the current, is greater, the current flow is contrasted. The resistance of the material is therefore varied by adjusting the location at which it comprises the substance that is completely conductive.
+
+\subsubsection{Global Positioning System (GPS) sensor}
+
+We use the GPS sensor almost every day in our life, mostly via our phone or in our car, the GPS sensor is used to navigate around the world.
+
+A minimum of 24 operational satellites orbit over 12,000 kilometers above ground at any given time. The locations of the satellites will always include up to 12 satellites in the sky above your location. The primary function of the 12 visible satellites is to relay radio frequency (1.1-1.5 GHz) information back to earth. A soil-based receiver or GPS module may measure its location and time with this information and other mathematical details. \cite{misra2006globa}
+
+
+
+\subsubsection{LiDAR}
+
+Lidar is an analogy for "light detection and ranging." The device uses eye-safe laser beams to produce a 3D view of the surroundings being scanned.
+
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.5\linewidth]{figures/lidarSensor.jpg}
+    \caption{A Lidar device used for automotive}
+    \source {Automotive Lidar Sensor Market 2017 - Leddar, Quanergy}
+\label{fig:lidarSensor}
+\end{figure}
+
+
+A typical lidar sensor absorbs the ambient atmosphere with pulsed light waves. Such pulses rebound and come back to the sensor. To calculate the distances traveled, the sensor takes time for every pulse to return to the sensor. This procedure is repeated millions of times per second and creates a precise 3D environmental map in real-time. This chart can be used for secure surfing by an onboard computer.
+Lidar is mostly used for advance autonomous systems to measure its surrounding environment.
+
+
+\subsubsection{Gyroscope sensor}
+
+
+A device that senses angular velocity is gyro sensors, also known as angular rate sensors or angular velocity sensors.  Gyroscopes in consumer électronics were not only found in compasses, ships, computer pointing instruments, etc.
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.5\linewidth]{figures/gyroSensor.png}
+    \caption{An MMSE gyroscope}
+    \source {controleverything.com}
+\label{fig:gyroSensor}
+\end{figure}
+
+Since the gyroscope allows orientation and rotation to be measured, designers have combined them with modern technology. The gyroscope technology has made it possible to detect the movement inside a 3D world more reliably than the previous lone accelerometer on most smartphones. Gyroscopes are also paired with accelerometers for better direction and motion sensing in consumer electronics. The gyroscopes inside smartphones don't have wheels and gimbals such as the conventional mechanical ones in an old aircraft, they are MEMS (Micro-Electro-Mechanical Systems)  gyroscopes instead.
+
+
+
+\subsubsection{Accelerometer sensor}
+
+
+
+It can be used for the measurement of the acceleration exerted on the sensor, as its name implies. The acceleration is usually performed in two or three components of the axis-vector, which make up the acceleration. \cite{FERNANDEZ20138} There are a few uses of Accelerometers, remote controls for videos, smartphones, etc. Accelerometer usually combined with a Gyroscope for better sensing. Accelerometers give us two data types: Static force used on the sensor due to gravity detection in the direction of orientation and  Sensor strength, acceleration to motion, force detection
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.5\linewidth]{figures/accSensor.jpg}
+    \caption{An electronic accelerometer sensor}
+    \source {nuttyengineer.com}
+\label{fig:accSensor}
+\end{figure}
+
+
+
+\subsubsection{Smart Sensors}
+
+Due to the different needs, the sensor characteristics were adjusted a lot over time. The needs allowed intelligent and intelligent sensors to be developed. The IEEE 1451 standard defines smart sensors as a physical device or a combination of sensors with physical connectors for communication with processor and data network. \cite{5739775}.
+
+Fig (smartSensorStructure) source cite [5739775]
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=\linewidth]{figures/smartSensorStructure.png}
+    \caption{ Smart sensor building blocks }
+    \source {Premier Farnell Ltd}
+\label{fig:smartSensorStructure}
+\end{figure}
+
+
+The advent of smart sensors contributed to the development of microcontrollers used all over the world. Because of the intelligent sensors, interfacing and working with other peripherals as a single device was possible.
+These smart sensors allow us to reduce data volume for communication with the main processor and made faster communication possible. It also reduced power consumption because multiple sensors are used together that use the same processing unit. The major benefit of these smart sensor is that they are typically small and very easy to integrate with other systems even with other sensors.
+
+Here come the uses of IMU (Inertial Measurement Units). In the next section, we describe the properties of an IMU.
+
+
+\subsection{IMU (Inertial Measurement Units)}
+As our goal is to use IMU as our main sensor to collect data for acquiring objects position and orientation, this is our principal sensor to study. An IMU is typically a combination (Accelerometer, Gyroscope, Magnetometer) of sensors working together.
+In this chapter, we will discuss the IMU, how its functions, its general structure, and the use cases.
+
+\subsubsection{General structure}
+
+The IMU typically consists of 3 individual sensors Accelerometer, Gyroscope, and a Magnetometer. Sometimes it comes with only an Accelerometer and Gyroscope. The Accelerometer, Gyroscope, and a Magnetometer provides the data of acceleration and velocity, orientation and angular velocity, gravitational forces respectively. This typically gives us the 9 axes of measurement on the other hand the IMU consist of only Accelerometer and Gyroscope provide 6 axes of measurement.
+Early days the size of IMU was considerably larger compared to the current IMUs. Its because those are made mechanically but thanks to the MEMS or Micro-Electro-Mechanical Systems that are made possible to make these sensors electronically it's miniaturized the size considerably. \cite{MEMS}.
+This helps us to integrate with other microcontrollers or microprocessors like Arduino or Raspberry Pi. Due to its miniature of size sometimes the IMUs are also known as MIMU (Miniature Inertial Measurement Units) \cite{2018233}
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=\linewidth]{figures/imuAG.png}
+    \caption{ An IMU with 6DoF workiks with a magnetometer for 9DoF }
+    \source {Stanford.edu lecture 9 of EE267: Virtual Reality S2020}
+\label{fig:imuAG}
+\end{figure}
+
+
+\subsubsection{Working principal of IMU}
+The main purpose of IMU is to measure and objects pose relative to its inertial space. Acceleration and angular speed are based on inertial principles are measured.
+
+Accelerometers calculate in a particular direction linear acceleration. An accelerometer can be also used as a downward force to measure gravity. Integrating acceleration once shows a velocity estimate, and integrating again provides you with a position estimate.
+
+
+\begin{equation}
+f^{b}=R^{b n}\left(a_{i i}^{n}-g^{n}\right)
+\end{equation}
+
+
+Although accelerometers can measure linear acceleration, they are unable to measure orientation or rotational motion. Nevertheless, gyroscopes measure angular velocities along three axes: pitch (x-axis), roll (y-axis), and yaw (z-axis). While a gyroscope does not have an initial frame of reference (like gravity), for measuring angular position, you can combine its data with data from an accelerometer. Gyroscope data output angular velocity (deg/s).
+
+The gyroscope measures the angular velocity of the body frame with respect to the inertial frame, expressed in the body frame \cite{ROS}, denoted by $\omega $. This angular velocity can be expressed as
+
+\begin{equation}
+\tilde{\omega}=\omega+b+\eta
+\end{equation}
+
+The estimated orientation can be obtained by integrating these angular velocities. We can also use Taylor series to measure discrete-time approximation of integration
+
+%\begin{equation}{\theta}_{\text {gyro}}^{(t)}={\theta}_{\text {gyro}}^{(t-1)}+\tilde{{\omega}} \Delta t\end{equation}
+
+Using 3 Gyro and Accelerometer we can obtain an estimated pose of the object in 3D space.
+The working principle of a single unit of IMU can be seen in the figure \ref{fig:imuWP}
+
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=\linewidth]{figures/imuWP.png}
+    \caption{ working principle of a single unit of IMU }
+    \source {Stanford.edu lecture 9 of EE267: Virtual Reality S2020}
+\label{fig:imuWP}
+\end{figure}
+
+
+
+
+
 
 \section{Sensor Fusion}
 Sensor fusion is the act of combining data acquired from two or more sensors sources
@@ -307,112 +484,5 @@ the expected value of the gradient with respect to the random samples actually
 used. Thus when computing the gradient of the loss function as a function of
 some samples x, we are computing an unbiased noisy estimate of the gradient.
 This is referred to as Stochastic Gradient Descent, or SGD. Stochastic Gradient
-
-
-
-\section{Sensors}
-
-A sensor is a piece of hardware that monitors an environment based on a sensing
-element. Sensors vary in quality and price. Many modern sensors have on-board
-processing units to understand the data acquired from the sensing element without
-a separate computational platform. Remote sensing devices are sensors that can perceive information without physical contact. Unfortunately, sensors tend to have
-inherent problems including, but not limited to [Elmenreich, 2001]:
-• Spatial coverage limits: Each sensor may only cover a certain region of space. For example, a dashboard camera will observe less surrounding region than a
-camera with a wide-view lens.
-• Temporal coverage limits: Each sensor may only provide updates over certain periods of time, which may cause uncertainty between updates.
-• Imprecision: Each sensor has limits to its sensing element. • Uncertainty: Unlike imprecision, uncertainty varies with the object being observed rather than the device making the observation. Uncertainty may be
-introduced by many environment factors or sensor defects in addition to time
-delay.
-• Deprivation of sensor: Sensor element breakdown will cause loss of perception in environment.
-Many diﬀerent types of sensors exist in the world, and each has its own unique ap
-plication. Four sensors are pertinent to the ﬁeld of autonomous driving [Levinson et al., 2011].
-The four sensors, their descriptions, uses, advantages and disadvantages are men
-tioned below:
-• GPS: Global-positioning system (GPS) is a system of satellites and receivers used for global navigation of Earth designed by the U.S. military. GPS sends a
-signal to any GPS receiver with an unobstructed line of sight to four or more
-GPS satellites surrounding Earth [gps, 2011]. GPS is useful for ﬁnding the
-exact coordinates of a vehicle when it is in the line of sight of multiple satellites
-orbiting the Earth.
-
-– Advantages: Precise coordinate measurements, fast, reliable in line of
-sight, externally-managed satellite systems.
-– Disadvantages: Expensive, subject to failure in bad weather conditions,
-subject to failure in distant locations where satellite coverage is blocked or
-unavailable, dependent on external data source, subject to hijacking and
-interference.
-• Radar: RAdio Detection And Ranging (radar) is a remote sensing device that uses an antenna to scatter radio signals across a region in the direction it is
-pointing and listens for response signals that are reﬂected by objects in that area.
-Radar measures signal time of ﬂight to determine the distance. Radars may use
-the doppler eﬀect to compute speed based on shift in frequency of scattered
-waves as an object moves. Radar is useful for detecting obstacles, vehicles and
-pedestrians around a vehicle [Huang et al., 2016]. Tracking multiple targets at
-once is a primary use for an automotive radar.
-– Advantages: High-bandwidth signals, wide-spread area coverage, inde
-pendent from external systems, works in multiple weather conditions, light
-independent solution.
-– Disadvantages: Expensive, subject to interference, easy to corrupt signal
-with electromagnetic interference, many reﬂective radio responses make it
-harder to manage radar signals, algorithms for radar tracking are still
-imperfect, narrow ﬁeld-of-view.
-• Camera: A camera is an optical instrument that utilizes at least one converging or convex lens and a shutter to limit light intake into an enclosed housing for
-capturing images or recording image sequences [Kodak, 2017]. Video cameras
-work much like still-image cameras, but instead of simply capturing still images,
-they record a series of successive still images rapidly at a speciﬁc frame rate
-
-[Kodak, 2017]. A camera is useful for acquiring images or video sequences of
-object pixels in view of the lens in order to help detect, segment, and classify
-objects based on perceivable object properties like location, color, shape, edges
-and corners.
-– Advantages: Perceives high-level object characteristics like color, shape,
-and edges, perceives location relative to camera unit, easy to visualize
-data.
-– Disadvantages: Potential slow frame-rate update, image quality may
-be dependent on light, weather and various other factors, data-intensive
-processing, all cameras perceive objects diﬀerently, typically has a limited
-range of perception compared to other sensors, may be expensive.
-• LiDAR: Light Detection and Ranging (LiDAR) is a method of remote sensing that uses light in the form of a pulsed laser to measure distance to an object
-based on signal time of ﬂight [NOAA, 2012]. LiDAR is useful for perceiving
-surroundings when 3-dimensional, high-resolution, light-independent images are
-necessary.
-– Advantages: Independent of light, weather and external data sources,
-fast, accurate, 3-dimensional, high-resolution.
-– Disadvantages: Expensive, subject to interference by reﬂection or lack
-thereof, incompatible with transparent surfaces, data-intensive processing,
-less durable than other sensors.
-
-\section{Inertial Mesurement Unit (IMU)}
-An inertial measurement unit is an electronic device that measures and reports a body's specific force, angular rate, and sometimes the orientation of the body, using a combination of accelerometers, gyroscopes, and sometimes magnetometers.
-
-\section{Sensorfutions}
-Sensor fusion is the act of combining data acquired from two or more sensors sources
-such that the resulting combination of sensory information provides a more certain description of factors observed by the separate sensors than would be if used individ
-ually [Elmenreich, 2001]. Sensor fusion is pertinent in many applications that entail
-the use of multiple sensors for inference and control. Examples of applications in
-clude intelligent and automated systems such as automotive driver assistance systems,
-autonomous robotics, and manufacturing robotics [Elmenreich, 2007].
-Sensor fusion methods aim to solve many of the problems inherently present in
-sensors. Several important beneﬁts may be derived from sensor fusion systems over
-single or disparate sensor sources. The beneﬁts of sensor fusion over single source are
-the following [Elmenreich, 2001]:
-
-• Reliability: Using multiple sensor sources introduces more resilience to partial sensor failure, which leads to greater redundancy and reliability.
-• Extended spatial coverage: Each sensor may cover diﬀerent areas. Combining the covered areas will lead to a greater overall coverage of surrounding
-environment and accommodate sensor deprivation.
-• Extended temporal coverage: Each sensor may update at diﬀerent time intervals, and thus interpolated sensor updates can be joined for increased tem
-poral coverage and decreased sensor deprivation.
-• Increased Conﬁdence: Combining sensor data will provide increased conﬁdence by providing measurements resilient to the uncertainties in any particular
-sensor based on the combined coverage and error mitigation of all sensors.
-• Reduced Uncertainty: Given the resilience of multiple sensors to the speciﬁc uncertainty of any one, the overall uncertainty of the perception system can be
-drastically reduced using sensor fusion.
-• Robustness against noise: Multiple sensor sources can be used to determine when any one sensor has encountered noise in order to mitigate inﬂuence of
-
-noise in the system.
-• Increased Resolution: Multiple sensor sources can be used to increase the resolution of measurements by combining all observations.
-According to [Rao, 2001], sensor fusion can yield results that outperform the mea
-surements of the single best sensor in the system if the fusion function class satisﬁes a
-proposed isolation property based on independently and identically distributed (iid)
-samples. The fusion function classes outlined that satisfy this isolation property
-are linear combinations, certain potential functions and feed-forward piecewise linear
-neural networks based on minimization of empirical error per sample.
 
 

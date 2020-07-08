@@ -2,28 +2,23 @@
 % Add the above to each chapter to make compiling the PDF easier in some editors.
 
 \chapter{Introduction}\label{chapter:introduction}
-Some Introduction will go here
-\section{Problem and solution overview}
 
-\subsection{Motivation}
+\section{Motivation}
 In Augmented Reality or Mixed Reality, tracking is one of the most important as well as challenging tasks. Tracking means to detect the position and orientation of an object to a coordinate system in real-time. Tracking has to be very accurate, precise and robust otherwise misalignment will occur between the virtual and real objects in the frame which makes the experience much less pleasant to the user. In the sector of medical augmented reality, the situation can be severe.
 
 There are many methods for tracking an object. We can track an object by multiple camera setup or use mechanical sensors such as Inertial Measurement Unit (IMU) or we can use hybrid approaches combining both camera and mechanical sensors.
 
-The problem with tracking objects with cameras or hybrid systems is that it needs an external camera setup which is not portable and the setup can be problematic to the user. In order to track objects without the camera, we use a mechanical sensor such as IMU, which is portable and embedded in the Head Mounted Display (HMD). Here sensor fusion comes handy. Sensor fusion is a technic for combining sensory data from multiple sensors output which gives better results for tracking. In the case of IMU sensory data, prior work[] shows that increasing the number of IMU tends to provide better accuracy.
+The problem with tracking objects with cameras or hybrid systems is that it needs an external camera setup which is not portable and the setup can be problematic to the user. In order to track objects without the camera, we use a mechanical sensor such as IMU, which is portable and embedded in the Head Mounted Display (HMD). Here sensor fusion comes handy. Sensor fusion is a technic for combining sensory data from multiple sensors output which gives better results for tracking. In the case of IMU sensory data, prior work \cite{8951908}  shows that increasing the number of IMU tends to provide better accuracy.
 
-\subsection{Goals}
-Our goal is to develop a deep learning model primarily with Convolutional Nural Network (CNN) and Dense Network to fuse multiple IMU data in a simulated environment. We will use many combinations of several IMUs and different CNN networks to predict the position and orientation of an object in a simulated environment and compare the results with other Deep Learning technics such as Recurrent Neural Network (RNN). We will take the combination which provides the best accuracy in the simulated environment and apply that model in a real-world scenario to test its accuracy to predict object pos.
+However recent work is primarily based on data from physical IMUs and multiple cameras in real-life. Some preliminary work has already been carried out with sensor fusion using data from the cameras. They are all used together to predict the object's pose. It seems like a good solution, but the mixing of sensory data with images together in order to train a Deep Neural Network is expensive. Another problem is that the real-life data from this sensor and camera has noise, also they need to calibrate and registration in terms of their mechanical specification. For example, if a  mechanical sensor such as Inertial Measurement Unit (IMU) can broadcast data at 240 Hz but a camera can only broadcast at 6o Hz, so in the hybrid system it's difficult to calibrate. 
+To overcome this problem, we aim to use a virtual environment like V-Rep from Coppelia Robotics to collect our data, where we don't need to register the sensors and the data is noise-free. The other benefit of using a virtual environment is that we can use it with very low cost and its less time consuming to run a sensor fusion setup compare to real-life sensor fusion set up. We like to use this opportunity to try and test a variety of Convolutional Neural Network Structure to predict the pose of a moving object using the data collected from the simulated environment.
 
-Acceleration values from an IMU are well known to be highly unstable and there could be misalignment between axes. Using Deep Learning, we aim to achieve a stable and reliable position and orientation transformation without any camera, sensor calibration, registration, and prior error correction.
+
+\section{Goals}
+
+Our aim is to create a virtual environment when we can place multiple IMU on a object which can move freely withing 6DoF. We aim to create multiple paths for the object in which it can travel and we can run the simulation several times to collect IMU data along with object’s pose data. Then we will use the data collected from the environment to train variety of CNN architecture and test  their performers in terms of errors displacement of pose compared to the actual object. We will compare the CNN architecture among themselves and find out which architecture works better. The best performing model will be used later in real life scenarios. 
 
 
 \section{Structure of the Thesis}
 
-This document is divided in five chapters. In the second chapter, the necessary
-theoretical background is presented, whereas third chapter shows the structural
-solution and implementation. Chapter four introduces the obtained results and
-pertinent analysis, while the conclusions and proposed future work are summarized
-in chapter five. Afterwards, references and relevant bibliography are presented and
-the document ends with Appendices where outcomes of every experiment are detailed
-in their plots.
+This document is divided into seven chapters. In the second chapter, the necessary theoretical background for our particular work is presented. In the third chapter, we will briefly discuss the prior work regarding sensor fusion with machine learning, what they did, and how our work is different from them. In chapter 4 we will discuss, how we set up our virtual environment and the data collection methodologies from the environment. Chapter 5 describes the experimental setup for the CNN architecture and the methodologies behind it. We will analyze the results obtained from our CNN in chapter 6, while the conclusions and proposed future work are summarized in chapter 7. Afterward, references and relevant bibliography are presented and the document ends with Appendices where outcomes of every experiment are detailed in their plots.

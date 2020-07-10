@@ -1,0 +1,97 @@
+PMID- 31052502
+OWN - NLM
+STAT- PubMed-not-MEDLINE
+LR  - 20200225
+IS  - 1424-8220 (Electronic)
+IS  - 1424-8220 (Linking)
+VI  - 19
+IP  - 9
+DP  - 2019 May 2
+TI  - Design and Implementation of Cloud Analytics-Assisted Smart Power Meters Considering 
+      Advanced Artificial Intelligence as Edge Analytics in Demand-Side Management for 
+      Smart Homes.
+LID - 10.3390/s19092047 [doi]
+LID - 2047
+AB  - In a smart home linked to a smart grid (SG), demand-side management (DSM) has the 
+      potential to reduce electricity costs and carbon/chlorofluorocarbon emissions, which 
+      are associated with electricity used in today's modern society. To meet continuously 
+      increasing electrical energy demands requested from downstream sectors in an SG, 
+      energy management systems (EMS), developed with paradigms of artificial intelligence 
+      (AI) across Internet of things (IoT) and conducted in fields of interest, monitor, 
+      manage, and analyze industrial, commercial, and residential electrical appliances 
+      efficiently in response to demand response (DR) signals as DSM. Usually, a DSM 
+      service provided by utilities for consumers in an SG is based on cloud-centered data 
+      science analytics. However, such cloud-centered data science analytics service 
+      involved for DSM is mostly far away from on-site IoT end devices, such as DR 
+      switches/power meters/smart meters, which is usually unacceptable for 
+      latency-sensitive user-centric IoT applications in DSM. This implies that, for 
+      instance, IoT end devices deployed on-site for latency-sensitive user-centric IoT 
+      applications in DSM should be aware of immediately analytical, interpretable, and 
+      real-time actionable data insights processed on and identified by IoT end devices at 
+      IoT sources. Therefore, this work designs and implements a smart edge 
+      analytics-empowered power meter prototype considering advanced AI in DSM for smart 
+      homes. The prototype in this work works in a cloud analytics-assisted electrical EMS 
+      architecture, which is designed and implemented as edge analytics in the 
+      architecture described and developed toward a next-generation smart sensing 
+      infrastructure for smart homes. Two different types of AI deployed on-site on the 
+      prototype are conducted for DSM and compared in this work. The experimentation 
+      reported in this work shows the architecture described with the prototype in this 
+      work is feasible and workable.
+FAU - Chen, Yung-Yao
+AU  - Chen YY
+AUID- ORCID: 0000-0001-6852-8862
+AD  - Graduate Institute of Automation Technology, National Taipei University of 
+      Technology, Taipei 106, Taiwan. yungyaochen@mail.ntut.edu.tw.
+FAU - Lin, Yu-Hsiu
+AU  - Lin YH
+AUID- ORCID: 0000-0002-1407-2262
+AD  - Department of Electrical Engineering, Allied AI Biomedical Research Center, Southern 
+      Taiwan University of Science and Technology, Tainan 71005, Taiwan. 
+      yhlin1108@stust.edu.tw.
+FAU - Kung, Chia-Ching
+AU  - Kung CC
+AD  - Department of Electrical Engineering, Allied AI Biomedical Research Center, Southern 
+      Taiwan University of Science and Technology, Tainan 71005, Taiwan. 
+      4a52c007@stust.edu.tw.
+FAU - Chung, Ming-Han
+AU  - Chung MH
+AD  - Department of Electrical Engineering, Allied AI Biomedical Research Center, Southern 
+      Taiwan University of Science and Technology, Tainan 71005, Taiwan. 
+      4a52c032@stust.edu.tw.
+FAU - Yen, I-Hsuan
+AU  - Yen IH
+AD  - Department of Electrical Engineering, Allied AI Biomedical Research Center, Southern 
+      Taiwan University of Science and Technology, Tainan 71005, Taiwan. 
+      4a52c010@stust.edu.tw.
+LA  - eng
+PT  - Journal Article
+DEP - 20190502
+TA  - Sensors (Basel)
+JT  - Sensors (Basel, Switzerland)
+JID - 101204366
+PMC - PMC6539684
+OTO - NOTNLM
+OT  - Internet of things
+OT  - artificial intelligence
+OT  - cloud analytics
+OT  - demand-side management
+OT  - edge/fog analytics
+OT  - electrical energy management
+OT  - smart grid
+OT  - smart homes/factories
+OT  - smart sensing
+COIS- The authors declare no conflict of interest.
+EDAT- 2019/05/06 06:00
+MHDA- 2019/05/06 06:01
+CRDT- 2019/05/05 06:00
+PHST- 2019/03/06 00:00 [received]
+PHST- 2019/04/27 00:00 [revised]
+PHST- 2019/04/29 00:00 [accepted]
+PHST- 2019/05/05 06:00 [entrez]
+PHST- 2019/05/06 06:00 [pubmed]
+PHST- 2019/05/06 06:01 [medline]
+AID - s19092047 [pii]
+AID - sensors-19-02047 [pii]
+AID - 10.3390/s19092047 [doi]
+PST - epublish
+SO  - Sensors (Basel). 2019 May 2;19(9):2047. doi: 10.3390/s19092047.

@@ -256,16 +256,21 @@ The working principle of a single unit of IMU can be seen in the figure \ref{fig
 
 
 
-\section{Sensor Fusion}
-Sensor fusion is the act of combining data acquired from two or more sensors sources
-such that the resulting combination of sensory information provides a more certain description of factors observed by the separate sensors than would be if used individ
-ually [Elmenreich, 2001]. Sensor fusion is pertinent in many applications that entail
-the use of multiple sensors for inference and control. Examples of applications in
-clude intelligent and automated systems such as automotive driver assistance systems,
-autonomous robotics, and manufacturing robotics [Elmenreich, 2007].
-Sensor fusion methods aim to solve many of the problems inherently present in
-sensors. Several important beneﬁts may be derived from sensor fusion systems over
-single or disparate sensor sources. The beneﬁts of sensor fusion over single source are
+
+\section{Sensor fusion}
+
+\subsection{Need of sensor fusion}
+
+First, we have to ask our selves why we need to do sensor fusion if we can get the pose of an object from a single IMU as we can see in the calculation from the previous section {ref section}. But the real-world situation is not an ideal situation. This will only work when there is no bias and no noise but which is unrealistic in the real world. Even if the bias is known and without any noise will have drift from integration. 
+For example, the magnetometer which generally works with earth's magnetic pole will have different biases and drift in different places on earth. 
+For these reasons, one sensor is not suitable to use for a particular purpose. We need to use multiple sensors in a different formation for that specific purpose to get better accuracy. 
+Research shows that there number of the sensor the more number of accuracy you can get. [Chapter 1.1 of your "Instrument Engineers' Handbook," Volume 1 (5th Edition):]
+In our situation, we are working with IMU sensors, previous research shows that if we use more IMU we get better accuracy [get cite from adnane]
+Now we established that we need more sensors to get better accuracy. But it's not as simple as its sounds, we can not simply get the sensor data and add them together to get the result. To do that we need sensor fusion. Now let's take a look what is sensor fusion.
+
+
+
+The beneﬁts of sensor fusion over single source are
 the following [Elmenreich, 2001]:
 \begin{itemize}
  \item Reliability: Using multiple sensor sources introduces more resilience to partial sensor failure, which leads to greater redundancy and reliability.
@@ -286,97 +291,287 @@ samples. The fusion function classes outlined that satisfy this isolation proper
 are linear combinations, certain potential functions and feed-forward piecewise linear
 neural networks based on minimization of empirical error per sample.
 
+\subsection{What is sensor fusion}
 
 
-\section{Current Sensor Fusion Systems}
-Many researchers and companies have developed their own versions of sensor fusion
-systems for various purposes. Many of these systems are well-known an widely used
-in practice within the ﬁelds of automotive and robotics. In [Steux et al., 2002], a
-vehicle detection and tracking system using monocular color vision and radar data
-fusion using a 3-layer belief network was proposed called FADE. The fusion system
-focused on lower-level fusion and combined 12 diﬀerent features to generate target
-position proposals each step and for each target. FADE performed in real-time and
-yielded good detection results in most cases according to scenarios recorded in a real
-car.
-A fusion system for collision warning using a single camera and radar was applied
-to detect and track vehicles in [Srinivasa et al., 2003]. The detections were fused using
-a probabilistic framework in order to compute reliable vehicle depth and azimuth
-angles. Their system clustered object detections into meta-tracks for each object and
-fused object tracks between the sensors. They found that the radar had many false
-positives due to multiple detections on large vehicles, structures, roadway signs and overhead structures. They also found that the camera had false positive detections on
-larger vehicles and roadway noise like potholes. Their system worked appropriately
-for nearby vehicles that were clearly visible by both sensors, but the system failed to
-detect vehicles more than 100 meters away due to insuﬃcient resolution or vehicle
-occlusion.
-In [Dagan et al., 2004], engineers from Mobileye successfully applied a camera
-system to compute the time to collision (TTC) course from size and position of
-vehicles in the image. Although they did not test this theory, they mentioned the
-future use of radar and camera in a sensor fusion system since the radar would
-give more accurate range and range-rate measurements while the vision would solve
-angular accuracy problems of the radar. When the research was conducted, it was
-suggested that the fusion solution between radar and camera was costly, but since
-then, costs have decreased.
-A collision mitigation fusion system using a laser-scanner and stereo-vision was
-constructed and tested in [Labayrade et al., 2005]. The combination of the compli
-mentary laser scanner and stereo-vision sensors provided a high detection rate, low
-false alarm rate, and a system reactive to many obstacle occurrences. They men
-tioned that the laser-scanner was fast and accurate but could not be used alone due
-to many false alarms from collisions with the road surface and false detections with
-laser passes over obstacles. They also mentioned that stereo-vision was useful for
-modeling road geometry and obstacle detection, but it was not accurate for comput
-ing precise velocities or TTC for collision mitigation.
-In [Laneurit et al., 2003], a Kalman ﬁlter was successfully developed and applied
-for the purpose of sensor fusion between multiple sensors including GPS, wheel angle
-sensor, camera and LiDAR. They showed that this system was useful for detection
-and localization of vehicles on the road, especially when using the wheel angle sensor
-for detecting changes in vehicle direction. Their results revealed that cooperation between the positioning sensors for obstacle detection and location paired with LiDAR
-were able to improve global positioning of vehicles.
-A deep learning framework for signal estimation and classiﬁcation applicable for
-mobile devices was created and tested in [Yao et al., 2016]. This framework applied
-convolutional and recurrent layers for regression and classiﬁcation mobile comput
-ing tasks. The framework exploited local interactions of diﬀerent sensing modalities
-using convolutional neural network (CNN)s, merged them into a global interaction
-and extracted temporal relationships via stacked GRU or LSTM layers. Their frame
-work achieved a notable mean absolute error on vehicle tracking regression tasks as
-compared to existing sensor fusion systems and high accuracy on human activity
-recognition classiﬁcation tasks while it remained eﬃcient enough to use on mobile
-devices like the Google Nexus 5 and Intel Edison.
-A multimodal, multi-stream deep learning framework designed to tackle the ego
-centric activity recognition using data fusion was proposed in [Song et al., 2016b]. To
-begin, they extended a multi-stream CNN to learn spatial and temporal features from
-egocentric videos. Then, they proposed a multi-stream LSTM architecture to learn
-features from multiple sensor streams including accelerometer and gyroscope. Third,
-they proposed a two-level fusion technique using SoftMax classiﬁcation layers and dif
-ferent pooling methods to fuse the results of the neural networks in order to classify
-egocentric activities. The system performed worse than a hand-crafted multi-modal
-Fisher vector, but it was noted that hand-crafted features tended to perform better
-on smaller datasets. In review of the research, it seems there were limited amounts of
-data, ﬂaws in the fusion design with SoftMax combination and ﬂaws in the sensors,
-such as limited sensing capabilities. These factors all may have led to worse results
-than hand-crafted features on the utilized dataset.
-In [Wu et al., 2015], a multi-stream deep fusion neural network system using con
-volution neural networks and LSTM layers was applied to classify multi-modal temporal stream information in videos. Their adaptive multi-stream fusion system achieved
-an accuracy level much higher than other methods of fusion including averaging, ker
-nel averaging, multiple kernel learning (MKL), and logistic regression fusion methods.
+
+
+People tend to think that sensor fusion and sensor integration is the same thing but these two are very different terms for acquiring multiple sensor data. Sensor fusion does not necessarily mean combining multiple sensors together since multiple sensors can be sensed and measured by one sensor, and then the data can be combined together [sensor 2].
+
+Sensor fusion takes data from multiple sensors and fuses them to represent as one for better accuracy.
+In simple terms,  Sensor fusion is the act of combining data acquired from two or more sensors sources such that the resulting combination of sensory information provides a more certain description of factors observed by the separate sensors than would be if used individually{cite emirech 2001}
+
+The figure below shows a model of sensor fusion.
+fig. modelsf
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=\linewidth]{figures/modelsf.png}
+    \caption{ Block model diagram of sensor fusion }
+\label{fig:modelsf}
+\end{figure}
+
+
+
+Sensor fusion is applicable in many applications involving
+Usage of the various inference and control sensors. Examples of clude intelligent and automated applications such as automotive driver assistance systems, autonomous robotics, and robotics manufacturing [Elmenreich, 2007]. Methods of sensor fusion attempt to overcome many of the problems already present in sensors. Various important advantages can be derived from fusion sensor systems over single or disparate sensor sources.
+
+
+
+
+
+
+
+\section{Types of sensor fusion}
+
+
+
+
+Several researchers and firms built their own models of sensor fusion systems for specific purposes. Many of these systems in the automotive and robotics sectors are well known and widely used in practice. We can classify sensor fusion in many types based on their model, input-output, architecture. In basic, we can categorized sensor fusion in 2 types based on the algorithme or matmatical model it use. The analytical approach or probabilistic approach and a machine learning approach. We will discuss both types in the following section.
+
+
+
+\subsection{Analytical approach}
+
+In the analytical or probabilistic approach of the sensor fusion model, we try to determine the best output estimation of multiple sensors data as a single output. For example, there are 2 sensors S1 and S2 and their noise variance is n1 and n2 respectively.
+We can get the single measurement output X3 of there 2 combined sensor data is to apply an algorithm which is also employed within the Fraser-Potter fixed-interval smoother, [ Maybeck, S. (1982). Stochastic Models, Estimating, and Control. River Edge, NJ: Academic Press.] such as,
+
+X3 = V3 ( v1 X1 + v2 X2    )
+
+where we need to determine or estimate the v3
+we can do it using mathematical approaches such as Central Limit Theorem or Kalman Filter
+
+
+\subsubsection{Central Limit Theorem}
+
+The central limit theorem (CLT) states that, in certain cases, when independent random variables are introduced, their properly normalized sum tends towards a normal distribution (informally a bell curve), even though the original variables themselves are not normally distributed. The theorem is a key concept in probability theory, as it implies that probabilistic and statistical methods for ordinary distributions can be applied with many other distribution problems.
+
+we can use the previous equation and use the CLT to do a basic sensor fusion model
+
+
+\begin{equation}\mathbf{x}_{3}=\sigma_{3}^{2}\left(\sigma_{1}^{-2} \mathbf{x}_{1}+\sigma_{2}^{-2} \mathbf{x}_{2}\right)\end{equation}
+
+where  \begin{equation}\sigma_{3}^{2}=\left(\sigma_{1}^{-2}+\sigma_{2}^{-2}\right)^{-1}\end{equation} is the total forecast variance. The fused effect can be seen simply as a linear combination of both measurements, which are measured by their respective noise variances.
+
+
+\subsubsection{Kalman filter}
+
+Another way of doing sensor fusion is by using a Kalman filter or extended Kalman filter. he Kalman filtering method is also known as linear quadratic estimation (LQE) is an algorithm in statistics and control theory that makes use of a series of measurements observed throughout the time containing statistical noise and other inaccuracies, and provides estimates of unknown variables which are more reliable than those based solely on a single measurement by estimating a joint probability distribution over time. The filter is named after the leading inventor of his theory, Rudolf E. Kálmán.
+
+The most basic form of Kalman filter is a 3-step filter.
+\begin{itemize}
+ \item Predict - estimate the object's location after time t+1 based on previous knowledge of the object's location and kinematic equations.
+ \item Measuring - Get sensor readings regarding object's position and compare them to Prediction
+ \item Update - Updates the data of the object's position (or status) according to prediction and sensor values
+\end{itemize}
+
+
+[mathematics goes here]
+
+%Given past estimates xˆ1, . . . , xˆt and measurements z1, . . . , zt+1, we form an estimate
+%xˆt+1 of the state xt+1 via
+%x¯t+1 = Fxˆt, (3)
+%xˆt+1 = ¯xt+1 + Kt+1(zt+1 − Hx¯t+1), (4)
+%where Kt+1 ∈ R
+%k×d
+%is called the Kalman gain (at time t + 1). It is itself updated sequentially, via
+%P¯
+%t+1 = F PtF
+%T + Q, (5)
+%Kt+1 = P¯
+%t+1HT
+%(HP¯
+%t+1HT + R)
+%−1
+%, (6)
+%Pt+1 = (I − Kt+1H)P¯
+%t+1. (7)
+%where Pt+1 ∈ R
+%k×k denotes the state error covariance (at time t + 1). The step (3) is often called
+%the predict step: we form an intermediate estimate x¯t+1 of the state based on the process model and
+%our estimate at the previous time point. T
+
+
+The difference between the Kalman filter and extended Kalman filter is that The Kalman filter (KF) is a repeating Bayesian filtering method that supposes the Gaussian noise in the system. An extension of Kalman's classical nonlinear filter, where nonlinearity is approximated by first or second-order derivation, is the Extended Kalman Filter (EKF).
+
+
+The other type of sensor Fusion approach is the MAchine learning approach. We will discuss machine learning approach in detail in the nest section of this chapter
+
+
+
+
+%Many researchers and companies have developed their own versions of sensor fusion
+%systems for various purposes. Many of these systems are well-known an widely used
+%in practice within the ﬁelds of automotive and robotics. In [Steux et al., 2002], a
+%vehicle detection and tracking system using monocular color vision and radar data
+%fusion using a 3-layer belief network was proposed called FADE. The fusion system
+%focused on lower-level fusion and combined 12 diﬀerent features to generate target
+%position proposals each step and for each target. FADE performed in real-time and
+%yielded good detection results in most cases according to scenarios recorded in a real
+%car.
+%A fusion system for collision warning using a single camera and radar was applied
+%to detect and track vehicles in [Srinivasa et al., 2003]. The detections were fused using
+%a probabilistic framework in order to compute reliable vehicle depth and azimuth
+%angles. Their system clustered object detections into meta-tracks for each object and
+%fused object tracks between the sensors. They found that the radar had many false
+%positives due to multiple detections on large vehicles, structures, roadway signs and overhead structures. They also found that the camera had false positive detections on
+%larger vehicles and roadway noise like potholes. Their system worked appropriately
+%for nearby vehicles that were clearly visible by both sensors, but the system failed to
+%detect vehicles more than 100 meters away due to insuﬃcient resolution or vehicle
+%occlusion.
+%In [Dagan et al., 2004], engineers from Mobileye successfully applied a camera
+%system to compute the time to collision (TTC) course from size and position of
+%vehicles in the image. Although they did not test this theory, they mentioned the
+%future use of radar and camera in a sensor fusion system since the radar would
+%give more accurate range and range-rate measurements while the vision would solve
+%angular accuracy problems of the radar. When the research was conducted, it was
+%suggested that the fusion solution between radar and camera was costly, but since
+%then, costs have decreased.
+%A collision mitigation fusion system using a laser-scanner and stereo-vision was
+%constructed and tested in [Labayrade et al., 2005]. The combination of the compli
+%mentary laser scanner and stereo-vision sensors provided a high detection rate, low
+%false alarm rate, and a system reactive to many obstacle occurrences. They men
+%tioned that the laser-scanner was fast and accurate but could not be used alone due
+%to many false alarms from collisions with the road surface and false detections with
+%laser passes over obstacles. They also mentioned that stereo-vision was useful for
+%modeling road geometry and obstacle detection, but it was not accurate for comput
+%ing precise velocities or TTC for collision mitigation.
+%In [Laneurit et al., 2003], a Kalman ﬁlter was successfully developed and applied
+%for the purpose of sensor fusion between multiple sensors including GPS, wheel angle
+%sensor, camera and LiDAR. They showed that this system was useful for detection
+%and localization of vehicles on the road, especially when using the wheel angle sensor
+%for detecting changes in vehicle direction. Their results revealed that cooperation between the positioning sensors for obstacle detection and location paired with LiDAR
+%were able to improve global positioning of vehicles.
+%A deep learning framework for signal estimation and classiﬁcation applicable for
+%mobile devices was created and tested in [Yao et al., 2016]. This framework applied
+%convolutional and recurrent layers for regression and classiﬁcation mobile comput
+%ing tasks. The framework exploited local interactions of diﬀerent sensing modalities
+%using convolutional neural network (CNN)s, merged them into a global interaction
+%and extracted temporal relationships via stacked GRU or LSTM layers. Their frame
+%work achieved a notable mean absolute error on vehicle tracking regression tasks as
+%compared to existing sensor fusion systems and high accuracy on human activity
+%recognition classiﬁcation tasks while it remained eﬃcient enough to use on mobile
+%devices like the Google Nexus 5 and Intel Edison.
+%A multimodal, multi-stream deep learning framework designed to tackle the ego
+%centric activity recognition using data fusion was proposed in [Song et al., 2016b]. To
+%begin, they extended a multi-stream CNN to learn spatial and temporal features from
+%egocentric videos. Then, they proposed a multi-stream LSTM architecture to learn
+%features from multiple sensor streams including accelerometer and gyroscope. Third,
+%they proposed a two-level fusion technique using SoftMax classiﬁcation layers and dif
+%ferent pooling methods to fuse the results of the neural networks in order to classify
+%egocentric activities. The system performed worse than a hand-crafted multi-modal
+%Fisher vector, but it was noted that hand-crafted features tended to perform better
+%on smaller datasets. In review of the research, it seems there were limited amounts of
+%data, ﬂaws in the fusion design with SoftMax combination and ﬂaws in the sensors,
+%such as limited sensing capabilities. These factors all may have led to worse results
+%than hand-crafted features on the utilized dataset.
+%In [Wu et al., 2015], a multi-stream deep fusion neural network system using con
+%volution neural networks and LSTM layers was applied to classify multi-modal temporal stream information in videos. Their adaptive multi-stream fusion system achieved
+%an accuracy level much higher than other methods of fusion including averaging, ker
+%nel averaging, multiple kernel learning (MKL), and logistic regression fusion methods.
 
 
 
 \section{Machine Learning}
-Machine Learning is a term that describes algorithms that learn from data.
-Goodfellow et al. quotes Mitchell from 1996 for a definition of
-what learning means, A computer program is said to learn from experience
-E with respect to some class of tasks T and performance measure P, if its
-performance at tasks in T, as measured by P, improves with experience E.
-There is a wide variety of tasks T that can be done. For instance common
-tasks are regression, classification, anomaly detection, denoising and translation.
-Depending on what experience E they see during the learning process the most
-algorithms can be classified as supervised or unsupervised learning. Supervised
-learning algorithms experience a data set together with target values or labels
-that act as instructions on what to do. The unsupervised learning algorithms
-don’t have any labels or targets but instead try to learn about the structure of
-the data set. The performance P can be how far off from the labels the output
-of the algorithm is in the case of supervised learning. This performance measure
-is often difficult to choose.
+
+
+He also speaks about machine learning in these days, who does not have a background in computer science. We live in a data world. Data are available wherever we go. We can readily say in modern times that 'data is power.'
+
+This knowledge can be used in many ways-messages, photographs, audio, numbers, etc. There are millions of features and insights in this vast sea of raw data that can be very useful if further processed. Machine learning is in simple terms a mechanism by which a machine understands and predicts the underlying characteristics of a given data set. The research method uses specific algorithms to identify patterns in the data set for statistical analysis.
+
+Machine learning algorithms create models, which will be used eventually to predict the outcome by training on the data provided. The method is easy, find the model in a dataset, use the learning to make the predictions on a new yet simultaneous dataset.
+
+
+Machine Learning is an expression that describes data-learning algorithms.
+A computer program is said to draw on experience E for some class of tasks T and performance measure P, when its performance on tasks T as measured by P enhances experience E.  [Good Fellow et al. quotes Mitchell from 1996]
+Tasks can be performed in a variety of ways. Common, for example Regression, classification, identification of abnormalities, demotization and translation are such activities.
+
+
+Based on the learning process most machine learning algorithms can be classified into 3 sections, supervise, unsupervised learning and reinforcement learning.
+\begin{itemize}
+\item Supervised learning algorithms have their data and a target value for each point of data which it tries to learn by using an approximation algorithm, on the other hand, 
+\item Unsupervised learning don’t have any labels or targets but instead, try to learn about the structure of the data set.
+\item Reinforcement Learning is quite different from supervised and unsupervised learning. The objective of Reinforcement Learning in simple terms, to reward good conduct or results to further enhance the results. The main idea is to make a sequence of decisions in a game like a scenario through agents. Depending on the action taken, the agent is compensated or penalized. The way rewarding and penalty work on results is up to the model 's definition. It uses search strength, lots of tests, and mistakes. This is the perfect way to leverage the ingenuity and analytical capacity of a computer.
+\end{itemize}
+
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=\linewidth]{figures/mlWorld.png}
+    \caption{ World of machine learning }
+    \source {towardsdatascience.com}
+\label{fig:mlWorld}
+\end{figure}
+
+
+
+%Machine Learning is a term that describes algorithms that learn from data.
+%Goodfellow et al. quotes Mitchell from 1996 for a definition of
+%what learning means, A computer program is said to learn from experience
+%E with respect to some class of tasks T and performance measure P, if its
+%performance at tasks in T, as measured by P, improves with experience E.
+%There is a wide variety of tasks T that can be done. For instance common
+%tasks are regression, classification, anomaly detection, denoising and translation.
+%Depending on what experience E they see during the learning process the most
+%algorithms can be classified as supervised or unsupervised learning. Supervised
+%learning algorithms experience a data set together with target values or labels
+%that act as instructions on what to do. The unsupervised learning algorithms
+%don’t have any labels or targets but instead try to learn about the structure of
+%the data set. The performance P can be how far off from the labels the output
+%of the algorithm is in the case of supervised learning. This performance measure
+%is often difficult to choose.
+
+
+
+
+Using Machine Learning we can accomplish manly 3 of these following tasks.
+\begin{itemize}
+\item Regression: Regression attempts to estimate a numerical value from a given number of data points. Forecasting sharemarket or climate, financial audit, for example. There are many types of algorithms for regression analysis. Like – linear, logistic, polynomial, table, [4 in ml], etc.
+
+\item Classification: This technique predicts that a class will be trained on a dataset with many predefined classes. For instance – a model trained on a dataset consists of photos of many animals and then predicts which animal it is when a new image is seen. Multiple types of classification can include binary classifiers, multiclass classifiers. Numerous algorithms are available there for classification. For example – Naive Baias , Decision Trees, and K-Nearest Neighbours. [5 in ml].
+
+\item Clustering: The technology of clustering attempts to identify similarities between data points and to create new clusters with the same data points. When it comes to user behavior research, recommender systems, it is useful to show similarities between data points. For example, a data set consists of data of the customers of a business, using the clustering algorithms on the data set we can group the customer in sections which will help the business to make better decisions. Many well-known clustering algorithms such as – K-means, expectation-maximization, hierarchical, density-based, etc [6 in ml] are available.
+
+\end{itemize}
+
+
+So we can see there are many forms of machine learning, as we are using Convolutional Neural Network (CNN) withs is a type of Artificial Neural Network, we are going to discuss details about it in the upcoming sections.
+
+
+
+
+
+\section{Artificial Neural Network}
+
+An Artificial Neural Network usually called neural network is an artificial representation of the human brain. Basically, a neural network is a set of input/output nodes. Each node performs a simple computation by its node function. The connection among the nodes has a weight associated with it. The neural network tries to simulate its learning process.
+
+
+
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.5\linewidth}
+    \includegraphics[width=\linewidth]{figures/bgn.png}
+    \caption{Single biological neuron}
+  \end{subfigure}
+\quad
+\begin{subfigure}[b]{0.5\linewidth}
+    \includegraphics[width=\linewidth]{figures/ann.png}
+    \caption{Mathematically modeled biological neuron}
+  \end{subfigure}
+ \caption{Biological neuron vs artificial neuron}
+  \label{fig:bgnVSann}
+  \source {datacamp.com}
+\end{figure}
+
+An Artificial Neuron tries to mimic the function of neurons in a biological brain. As a biological neuron gets some electric signal from the previous neuron from its dendrite and then passes on the signal if the signal has a certain threshold value through its axon to the next neuron. Together they form millions and billions of connections.
+This function of a biological neuron can be mathematically modeled. we get some values and we use an activation function to determine the threshold and can pass it on. The figure represents the functional similarities of a biological and computer-modeled neuron.
+
+
+
+
+
+
 
 
 
